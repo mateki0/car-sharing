@@ -1,4 +1,5 @@
 import React from "react";
+import { Text } from "react-native";
 import CarBox from "../Components/CarBox";
 import Heading from "../Components/Heading";
 import ScreenWrapper from "./styled/ScreenWrapper";
@@ -15,24 +16,21 @@ const GET_CARS = gql`
   }
 `;
 interface CarsProps {
-  car: {
-    brand: string;
-    productionYear: string;
-    engineCapacity: string;
-    enginePower: string;
-  };
-  index: number;
+  brand: string;
+  productionYear: string;
+  engineCapacity: string;
+  enginePower: string;
 }
 const Home = () => {
   const { loading, error, data } = useQuery(GET_CARS);
   if (error) {
     console.log(error.message);
   }
-  if (loading) return "Loading...";
+  if (loading) return <Text>"Loading..."</Text>;
   return (
     <ScreenWrapper>
       <Heading text="Ostatnio dodane samochody" />
-      {data.cars.map((car, index) => (
+      {data.cars.map((car: CarsProps, index: number) => (
         <CarBox
           key={index}
           brand={car.brand}

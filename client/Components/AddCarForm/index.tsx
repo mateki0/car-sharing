@@ -25,6 +25,7 @@ const ADD_CAR = gql`
       available: $available
     ) {
       brand
+      model
       engineCapacity
       enginePower
       productionYear
