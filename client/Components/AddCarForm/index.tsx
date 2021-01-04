@@ -9,13 +9,13 @@ import { useNavigation } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
 import { useForm, Controller } from "react-hook-form";
 import ErrorText from "../AccountForms/styled/ErrorText";
-import { ADD_CAR, ADD_IMAGE } from "../../src/utils/mutations";
+import { ADD_CAR } from "../../src/utils/mutations";
 import * as ImagePicker from "expo-image-picker";
 import * as Permission from "expo-permissions";
 import { Alert } from "react-native";
 import AddImage from "./styled/AddImage";
 import { ReactNativeFile } from "apollo-upload-client";
-import { formDataAppendFile } from "apollo-upload-client";
+import * as mime from "react-native-mime-types";
 interface CarProps {
   brand: string;
   model: string;
@@ -30,30 +30,37 @@ const AddCarForm = () => {
   const [addCar] = useMutation(ADD_CAR, {
     onCompleted: () => navigation.navigate("AccountScreen"),
   });
-  const [addImage] = useMutation(ADD_IMAGE);
+  // const [addImage] = useMutation(ADD_IMAGE);
   const [image, setImage] = React.useState("");
-  const handleAdd = (data: CarProps) => {
+  const generateRNFile = (uri, name) => {
+    return uri
+      ? new ReactNativeFile({
+          uri,
+          type: mime.lookup(uri) || "image",
+          name,
+        })
+      : null;
+  };
+  const handleAdd = async (data: CarProps) => {
     const { brand, model, productionYear, engineCapacity, enginePower } = data;
     const available = true;
-    const file = new ReactNativeFile({
-      uri: image,
-      name: "car.jpg",
-      type: "image/jpeg",
-    });
-
-    addCar({
-      variables: {
-        brand,
-        model,
-        productionYear,
-        engineCapacity,
-        enginePower,
-        available,
-        file,
-      },
-    });
+    const file = generateRNFile(image, `picture-${Date.now()}`);
+    try {
+      await addCar({
+        variables: {
+          brand,
+          model,
+          productionYear,
+          engineCapacity,
+          enginePower,
+          available,
+          file,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
-  const handleAddImage = (data: any) => {};
   React.useEffect(() => {
     register("brand");
     register("model");
@@ -90,6 +97,17 @@ const AddCarForm = () => {
     }
   };
 
+  // const onUploadPress = async () => {
+  //   const file = generateRNFile(image, `picture-${Date.now()}`);
+  //   try {
+  //     await addImage({
+  //       variables: { file: file },
+  //     });
+  //     console.log(file);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <AddCarContainer>
       <Label>Marka</Label>
@@ -216,6 +234,9 @@ const AddCarForm = () => {
       <AddImage onPress={takeImage}>
         <ButtonText>{image ? "Zmień zdjęcie" : "Dodaj zdjęcie"}</ButtonText>
       </AddImage>
+      {/* <SubmitButton onPress={onUploadPress}>
+        <ButtonText>upload</ButtonText>
+      </SubmitButton> */}
       <SubmitButton onPress={handleSubmit(handleAdd)}>
         <ButtonText>Dodaj samochód</ButtonText>
       </SubmitButton>

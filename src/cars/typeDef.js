@@ -13,14 +13,13 @@ const typeDef = gql`
       engineCapacity: String!
       enginePower: String!
       available: Boolean!
-      image: Upload
+      file: Upload
       date: String
     ): Car!
     uploadImage(file: Upload): File
     deleteCar(carID: String!): Car
   }
   type File {
-    id: ID!
     filename: String!
     mimetype: String!
     path: String!
@@ -32,8 +31,7 @@ const typeDef = gql`
     engineCapacity: String
     enginePower: String
     available: Boolean
-    image: Upload
-    date: String
+    file: File
   }
 `;
 module.exports = {

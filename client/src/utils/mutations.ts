@@ -1,12 +1,16 @@
 import {  gql } from "@apollo/client";
 
-export const ADD_IMAGE = gql`
-  mutation ADD_IMAGE(
-    $file: Upload
-  ){
-    filename
-  }
-`
+// export const ADD_IMAGE = gql`
+//   mutation ADD_IMAGE(
+//     $file: Upload
+//   ){
+//     uploadImage(
+//       file:$file
+//     ){
+//     filename
+//     }
+//   }
+// `
 export const ADD_CAR = gql`
   mutation ADD_CAR(
     $brand: String!
@@ -15,7 +19,7 @@ export const ADD_CAR = gql`
     $engineCapacity: String!
     $enginePower: String!
     $available: Boolean!
-    $image: Upload
+    $file: Upload
   ) {
     addCar(
       brand: $brand
@@ -24,7 +28,7 @@ export const ADD_CAR = gql`
       engineCapacity: $engineCapacity
       enginePower: $enginePower
       available: $available
-      image: $image
+      file: $file
     ) {
       brand
       model
@@ -32,7 +36,10 @@ export const ADD_CAR = gql`
       enginePower
       productionYear
       available
-      
+      path
+      id
+      filename
+      mimetype
     }
   }
 `;

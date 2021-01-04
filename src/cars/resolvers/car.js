@@ -26,8 +26,9 @@ const carSchema = new mongoose.Schema({
     required: true,
   },
   image: {
-    data: Buffer,
-    contentType: String,
+    filename: String,
+    mimetype: String,
+    path: String,
   },
   date: {
     type: Date,

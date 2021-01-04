@@ -13,6 +13,11 @@ const GET_CARS = gql`
       productionYear
       engineCapacity
       enginePower
+      available
+      file {
+        path
+        filename
+      }
     }
   }
 `;
@@ -23,7 +28,7 @@ interface CarsProps {
   engineCapacity: string;
   enginePower: string;
   available: boolean;
-  image: Array<string>;
+  file: any;
   date: string;
 }
 const Home = () => {
@@ -33,6 +38,7 @@ const Home = () => {
     console.log(error.message);
   }
   if (loading) return <Text>"Loading..."</Text>;
+  console.log(data);
   return (
     <ScreenWrapper>
       <Heading text="Ostatnio dodane samochody" />
@@ -44,7 +50,7 @@ const Home = () => {
           engineCapacity={car.engineCapacity}
           enginePower={car.enginePower}
           productionYear={car.productionYear}
-          available={true}
+          available={car.available}
         />
       ))}
     </ScreenWrapper>
