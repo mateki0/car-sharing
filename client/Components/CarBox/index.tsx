@@ -13,6 +13,7 @@ interface CarProps {
   enginePower: string;
   productionYear: string;
   available: boolean;
+  imgSrc: string;
 }
 
 const CarBox = ({
@@ -22,11 +23,13 @@ const CarBox = ({
   enginePower,
   productionYear,
   available,
+  imgSrc,
 }: CarProps) => {
   const capacity = engineCapacity.includes(".") ? "l" : "cm3";
+  console.log(imgSrc);
   return (
     <CarBoxContainer>
-      <CarImg source={require("./car.png")} />
+      <CarImg source={{ uri: imgSrc }} />
       <DescriptionWrapper>
         <Brand>{brand}</Brand>
         <Description>

@@ -14,9 +14,9 @@ const GET_CARS = gql`
       engineCapacity
       enginePower
       available
-      file {
+      image {
         path
-        filename
+        mimetype
       }
     }
   }
@@ -28,8 +28,8 @@ interface CarsProps {
   engineCapacity: string;
   enginePower: string;
   available: boolean;
-  file: any;
   date: string;
+  image: any;
 }
 const Home = () => {
   const { loading, error, data } = useQuery(GET_CARS);
@@ -51,6 +51,7 @@ const Home = () => {
           enginePower={car.enginePower}
           productionYear={car.productionYear}
           available={car.available}
+          imgSrc={car.image.path}
         />
       ))}
     </ScreenWrapper>

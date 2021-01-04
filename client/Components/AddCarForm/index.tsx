@@ -30,8 +30,8 @@ const AddCarForm = () => {
   const [addCar] = useMutation(ADD_CAR, {
     onCompleted: () => navigation.navigate("AccountScreen"),
   });
-  // const [addImage] = useMutation(ADD_IMAGE);
-  const [image, setImage] = React.useState("");
+
+  const [file, setFile] = React.useState("");
   const generateRNFile = (uri, name) => {
     return uri
       ? new ReactNativeFile({
@@ -44,7 +44,7 @@ const AddCarForm = () => {
   const handleAdd = async (data: CarProps) => {
     const { brand, model, productionYear, engineCapacity, enginePower } = data;
     const available = true;
-    const file = generateRNFile(image, `picture-${Date.now()}`);
+    const image = generateRNFile(file, `picture-${Date.now()}`);
     try {
       await addCar({
         variables: {
@@ -54,7 +54,7 @@ const AddCarForm = () => {
           engineCapacity,
           enginePower,
           available,
-          file,
+          image,
         },
       });
     } catch (error) {
@@ -92,7 +92,7 @@ const AddCarForm = () => {
       });
 
       if (!image.cancelled) {
-        setImage(image.uri);
+        setFile(image.uri);
       }
     }
   };
@@ -229,14 +229,12 @@ const AddCarForm = () => {
         <ErrorText>{errors.productionYear.message}</ErrorText>
       )}
       <Label>
-        {image ? "Dodano zdjecie!" : "Dodaj zdjęcie swojego samochodu"}
+        {file ? "Dodano zdjecie!" : "Dodaj zdjęcie swojego samochodu"}
       </Label>
       <AddImage onPress={takeImage}>
-        <ButtonText>{image ? "Zmień zdjęcie" : "Dodaj zdjęcie"}</ButtonText>
+        <ButtonText>{file ? "Zmień zdjęcie" : "Dodaj zdjęcie"}</ButtonText>
       </AddImage>
-      {/* <SubmitButton onPress={onUploadPress}>
-        <ButtonText>upload</ButtonText>
-      </SubmitButton> */}
+
       <SubmitButton onPress={handleSubmit(handleAdd)}>
         <ButtonText>Dodaj samochód</ButtonText>
       </SubmitButton>

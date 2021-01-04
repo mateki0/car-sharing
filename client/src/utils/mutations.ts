@@ -19,7 +19,7 @@ export const ADD_CAR = gql`
     $engineCapacity: String!
     $enginePower: String!
     $available: Boolean!
-    $file: Upload
+    $image: Upload
   ) {
     addCar(
       brand: $brand
@@ -28,7 +28,7 @@ export const ADD_CAR = gql`
       engineCapacity: $engineCapacity
       enginePower: $enginePower
       available: $available
-      file: $file
+      image: $image
     ) {
       brand
       model
@@ -36,10 +36,7 @@ export const ADD_CAR = gql`
       enginePower
       productionYear
       available
-      path
-      id
-      filename
-      mimetype
+      
     }
   }
 `;
