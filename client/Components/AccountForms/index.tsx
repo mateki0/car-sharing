@@ -7,29 +7,14 @@ import SubmitButton from "./styled/SubmitButton";
 import { useForm, Controller } from "react-hook-form";
 import ErrorText from "./styled/ErrorText";
 import { useNavigation } from "@react-navigation/native";
-import { useMutation, gql } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import AsyncStorage from "@react-native-community/async-storage";
+import { INSERT_USER, LOGIN_USER } from "../../src/utils/mutations";
 interface UseFormProps {
   email: string;
   password: string;
 }
-const INSERT_USER = gql`
-  mutation INSERT_USER($email: String!, $password: String!) {
-    signup(email: $email, password: $password) {
-      id
-      email
-    }
-  }
-`;
-const LOGIN_USER = gql`
-  mutation LOGIN_USER($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      user {
-        id
-      }
-    }
-  }
-`;
+
 const AccountForms = ({ isLogin }: { isLogin?: boolean }) => {
   const [insertUser] = useMutation(INSERT_USER, {
     onCompleted: () => navigation.navigate("Login"),

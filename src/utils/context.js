@@ -1,5 +1,5 @@
 const tokenUtil = require("./token");
-const User = require("../models/user");
+const User = require("../user/resolvers/user");
 
 const TOKEN_HEADER_NAME = "x-token";
 

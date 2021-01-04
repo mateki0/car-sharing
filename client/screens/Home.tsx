@@ -9,6 +9,7 @@ const GET_CARS = gql`
   query GET_CARS {
     cars {
       brand
+      model
       productionYear
       engineCapacity
       enginePower
@@ -17,12 +18,17 @@ const GET_CARS = gql`
 `;
 interface CarsProps {
   brand: string;
+  model: string;
   productionYear: string;
   engineCapacity: string;
   enginePower: string;
+  available: boolean;
+  image: Array<string>;
+  date: string;
 }
 const Home = () => {
   const { loading, error, data } = useQuery(GET_CARS);
+
   if (error) {
     console.log(error.message);
   }
@@ -34,7 +40,7 @@ const Home = () => {
         <CarBox
           key={index}
           brand={car.brand}
-          model="Focus"
+          model={car.model}
           engineCapacity={car.engineCapacity}
           enginePower={car.enginePower}
           productionYear={car.productionYear}

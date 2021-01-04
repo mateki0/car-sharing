@@ -23,6 +23,7 @@ const CarBox = ({
   productionYear,
   available,
 }: CarProps) => {
+  const capacity = engineCapacity.includes(".") ? "l" : "cm3";
   return (
     <CarBoxContainer>
       <CarImg source={require("./car.png")} />
@@ -32,9 +33,11 @@ const CarBox = ({
           {model +
             " " +
             engineCapacity +
+            "" +
+            capacity +
             " " +
             enginePower +
-            " " +
+            "km " +
             productionYear}
         </Description>
       </DescriptionWrapper>

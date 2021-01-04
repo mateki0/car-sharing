@@ -1,24 +1,35 @@
-const express = require('express')
+const express = require("express");
 
-// The reason why apollo-server-express is because later on for testing we use Supertest, which requires an app object
-const { ApolloServer } = require('apollo-server-express')
+const { ApolloServer, gql } = require("apollo-server-express");
 
-// we don't have these yet, but don't worry we'll get there.
-const context = require('./utils/context')
-const schema = require('./modules')
+const context = require("./utils/context");
+const cars = require("./cars");
+const user = require("./user");
+const {
+  isAuthenticatedDirective,
+} = require("./user/directives/is-authenticated");
 
+const typeDef = gql`
+  type Query
+  type Mutation
+  directive @isAuthenticated on FIELD_DEFINITION
+`;
 const server = new ApolloServer({
-  schema,
+  typeDefs: [typeDef, cars.typeDef, user.typeDef],
+  resolvers: [cars.resolvers, user.resolvers],
+  schemaDirectives: {
+    authenticated: isAuthenticatedDirective,
+  },
   context: async ({ req }) => ({
-    user: await context.getUser(req)
-  })
-})
+    user: await context.getUser(req),
+  }),
+});
 
-const app = express()
+const app = express();
 
 server.applyMiddleware({
-  path: '/',
-  app
-})
+  path: "/",
+  app,
+});
 
-module.exports = app
+module.exports = app;

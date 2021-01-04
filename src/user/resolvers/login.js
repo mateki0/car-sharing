@@ -1,9 +1,9 @@
 const { AuthenticationError } = require("apollo-server-express");
 const bcrypt = require("bcrypt");
 
-const tokenUtil = require("../../../utils/token");
-const User = require("../../../models/user");
-const config = require("../../../config");
+const tokenUtil = require("../../utils/token");
+const User = require("./user");
+const config = require("../../config");
 
 const login = async (_, { email, password }) => {
   const user = await User.findOne({

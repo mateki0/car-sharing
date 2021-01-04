@@ -1,16 +1,25 @@
-const { UserInputError } = require("apollo-server-express");
-const Car = require("../../../models/car");
+const Car = require("./car");
 
 const addCar = async (
   _,
-  { brand, module, productionYear, engineCapacity, enginePower }
-) => {
-  const car = await Car.create({
+  {
     brand,
-    module,
+    model,
     productionYear,
     engineCapacity,
     enginePower,
+    available,
+    image,
+  }
+) => {
+  const car = await Car.create({
+    brand,
+    model,
+    productionYear,
+    engineCapacity,
+    enginePower,
+    available,
+    image,
   });
 
   return {

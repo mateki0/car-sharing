@@ -1,6 +1,6 @@
 const { gql } = require("apollo-server-express");
 
-const typeDefs = gql`
+const typeDef = gql`
   extend type Query {
     cars: [Car]
   }
@@ -13,10 +13,18 @@ const typeDefs = gql`
       engineCapacity: String!
       enginePower: String!
       available: Boolean!
+      image: Upload
+      date: String
     ): Car!
+    uploadImage(file: Upload): File
     deleteCar(carID: String!): Car
   }
-
+  type File {
+    id: ID!
+    filename: String!
+    mimetype: String!
+    path: String!
+  }
   type Car {
     brand: String
     model: String
@@ -24,12 +32,10 @@ const typeDefs = gql`
     engineCapacity: String
     enginePower: String
     available: Boolean
+    image: Upload
+    date: String
   }
 `;
-
-const resolvers = require("./resolvers");
-
 module.exports = {
-  typeDefs: [typeDefs],
-  resolvers,
+  typeDef,
 };

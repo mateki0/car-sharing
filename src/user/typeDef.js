@@ -1,6 +1,6 @@
 const { gql } = require("apollo-server-express");
 
-const typeDefs = gql`
+const typeDef = gql`
   extend type Query {
     me: User @isAuthenticated
   }
@@ -23,9 +23,6 @@ const typeDefs = gql`
   }
 `;
 
-const resolvers = require("./resolvers");
-
 module.exports = {
-  typeDefs: [typeDefs],
-  resolvers,
+  typeDef,
 };

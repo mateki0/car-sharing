@@ -1,5 +1,5 @@
 const expect = require("expect");
-const { request } = require("../../utils/test");
+const { request } = require("../utils/test");
 
 const testUser = {
   email: "test-user@gmail.com",

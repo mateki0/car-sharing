@@ -6,8 +6,9 @@ import {
   InMemoryCache,
   createHttpLink
 } from "@apollo/client";
+import {createUploadLink } from 'apollo-upload-client'
 const initApollo = () => {
-  const httpLink = createHttpLink({
+  const httpLink = createUploadLink({
     fetch: fetch as any,
     uri: 'http://192.168.1.9:5000/graphql',
     credentials: 'same-origin',
