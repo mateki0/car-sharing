@@ -1,36 +1,33 @@
 import * as React from "react";
+import { Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Login from "../screens/Login";
 import Home from "../screens/Home";
 import Register from "../screens/Register";
-import AsyncStorage from "@react-native-community/async-storage";
 import AddCar from "../screens/AddCar";
 import AccountScreen from "../screens/AccountScreen";
+import { useQuery } from "@apollo/client";
+import { GET_USER } from "../src/utils/mutations";
 import { UserContext } from "../src/contexts/UserContext";
-
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
   const [isLogged, setIsLogged] = React.useState(false);
+  const { loading, error, data } = useQuery(GET_USER);
   const { user } = React.useContext(UserContext);
-  const [token, setToken] = React.useState<string | null>("");
-  React.useEffect(() => {
-    user && user.length > 0 ? setIsLogged(true) : setIsLogged(false);
-  }, [user]);
-  const getToken = React.useCallback(async () => {
-    try {
-      const value = await AsyncStorage.getItem("token");
-      setToken(value);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
+  if (error) {
+    console.log("error");
+  }
+  // pobrac usera z query, wrzucic do contextu, wyciagnac w add car
 
   React.useEffect(() => {
-    getToken();
-  }, []);
+    user ? setIsLogged(true) : setIsLogged(false);
+  }, [user]);
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({

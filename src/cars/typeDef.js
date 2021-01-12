@@ -15,6 +15,7 @@ const typeDef = gql`
       available: Boolean!
       image: Upload
       date: String
+      owner: String!
     ): Car!
     deleteCar(carID: String!): Car
   }
@@ -28,6 +29,7 @@ const typeDef = gql`
     available: Boolean
     image: String
     date: String
+    owner: String
   }
 `;
 module.exports = {

@@ -11,6 +11,7 @@ const addCar = async (
     enginePower,
     available,
     image,
+    owner,
   }
 ) => {
   const car = await Car.create({
@@ -21,6 +22,7 @@ const addCar = async (
     enginePower,
     available,
     image: await processUpload(image),
+    owner,
   });
 
   return {

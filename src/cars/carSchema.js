@@ -32,6 +32,10 @@ const carSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  owner: {
+    type: String,
+    required: true,
+  },
 });
 
 const Car = mongoose.model("Car", carSchema);

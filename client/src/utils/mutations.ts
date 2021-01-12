@@ -22,6 +22,20 @@ export const GET_CARS = gql`
     }
   }
 `;
+export const GET_USER_CARS = gql`
+  query GET_USER_CARS {
+    getUserCars{
+      brand
+      model
+      productionYear
+      engineCapacity
+      enginePower
+      available
+      image
+      date
+    }
+  }
+`
 export const ADD_CAR = gql`
   mutation ADD_CAR(
     $brand: String!
@@ -31,6 +45,7 @@ export const ADD_CAR = gql`
     $enginePower: String!
     $available: Boolean!
     $image: Upload
+    $owner:String!
   ) {
     addCar(
       brand: $brand
@@ -40,6 +55,7 @@ export const ADD_CAR = gql`
       enginePower: $enginePower
       available: $available
       image: $image
+      owner: $owner
     ) {
       brand
       model

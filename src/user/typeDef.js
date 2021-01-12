@@ -3,6 +3,7 @@ const { gql } = require("apollo-server-express");
 const typeDef = gql`
   extend type Query {
     me: User @isAuthenticated
+    getUserCars: [Car]
   }
 
   extend type Mutation {

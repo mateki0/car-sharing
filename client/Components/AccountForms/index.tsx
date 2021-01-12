@@ -8,7 +8,6 @@ import { useForm, Controller } from "react-hook-form";
 import ErrorText from "./styled/ErrorText";
 import { useNavigation } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
-import * as SecureStore from "expo-secure-store";
 import { INSERT_USER, LOGIN_USER } from "../../src/utils/mutations";
 import { UserContext } from "../../src/contexts/UserContext";
 interface UseFormProps {
@@ -24,8 +23,6 @@ const AccountForms = ({ isLogin }: { isLogin?: boolean }) => {
   const [loginUser] = useMutation(LOGIN_USER, {
     onCompleted: ({ login }) => {
       handleUserChange(login.id);
-
-      SecureStore.setItemAsync("x-token", login.id);
       navigation.navigate("Samochody");
     },
   });

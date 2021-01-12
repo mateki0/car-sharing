@@ -18,6 +18,7 @@ import { ReactNativeFile } from "apollo-upload-client";
 import * as mime from "react-native-mime-types";
 
 import ImagePreview from "./styled/ImagePreview";
+import { UserContext } from "../../src/contexts/UserContext";
 interface CarProps {
   brand: string;
   model: string;
@@ -29,6 +30,8 @@ const AddCarForm = () => {
   const navigation = useNavigation();
   const { control, errors, register, handleSubmit } = useForm<CarProps>();
   const currentYear = new Date().getFullYear();
+  const { user } = React.useContext(UserContext);
+  console.log("user add Car", user);
   const [addCar] = useMutation(ADD_CAR, {
     onCompleted: () => navigation.navigate("AccountScreen"),
   });
@@ -57,6 +60,7 @@ const AddCarForm = () => {
           enginePower,
           available,
           image,
+          owner: user,
         },
       });
     } catch (error) {

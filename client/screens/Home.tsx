@@ -7,7 +7,7 @@ import { useQuery } from "@apollo/client";
 import { GET_CARS } from "../src/utils/mutations";
 import AvailableFilter from "../Components/AvailableFilter/AvailableFilter";
 
-interface CarsProps {
+export interface CarsProps {
   brand: string;
   model: string;
   productionYear: string;
