@@ -8,25 +8,30 @@ import { useForm, Controller } from "react-hook-form";
 import ErrorText from "./styled/ErrorText";
 import { useNavigation } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
-import AsyncStorage from "@react-native-community/async-storage";
+import * as SecureStore from "expo-secure-store";
 import { INSERT_USER, LOGIN_USER } from "../../src/utils/mutations";
+import { UserContext } from "../../src/contexts/UserContext";
 interface UseFormProps {
   email: string;
   password: string;
 }
 
 const AccountForms = ({ isLogin }: { isLogin?: boolean }) => {
+  const { handleUserChange } = React.useContext(UserContext);
   const [insertUser] = useMutation(INSERT_USER, {
     onCompleted: () => navigation.navigate("Login"),
   });
   const [loginUser] = useMutation(LOGIN_USER, {
     onCompleted: ({ login }) => {
-      setToken(login.user.id);
-      navigation.navigate("Home");
+      handleUserChange(login.id);
+
+      SecureStore.setItemAsync("x-token", login.id);
+      navigation.navigate("Samochody");
     },
   });
   const [editable, setEditable] = React.useState(false);
   const { control, errors, register, handleSubmit } = useForm<UseFormProps>();
+
   const navigation = useNavigation();
   React.useEffect(() => {
     setTimeout(() => {
@@ -39,13 +44,6 @@ const AccountForms = ({ isLogin }: { isLogin?: boolean }) => {
     register("password");
   }, [register]);
 
-  const setToken = React.useCallback(async (token: string) => {
-    try {
-      await AsyncStorage.setItem("token", token);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
   const handleLogin = (data: { email: string; password: string }) => {
     const { email, password } = data;
     loginUser({

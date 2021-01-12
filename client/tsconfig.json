@@ -8,6 +8,9 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": true,
-    "noImplicitAny": false
-  }
+    "noImplicitAny": false,
+    "isolatedModules": true,
+    "allowJs": true,
+  },
+  
 }

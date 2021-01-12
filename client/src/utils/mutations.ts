@@ -1,16 +1,27 @@
 import {  gql } from "@apollo/client";
 
-// export const ADD_IMAGE = gql`
-//   mutation ADD_IMAGE(
-//     $file: Upload
-//   ){
-//     uploadImage(
-//       file:$file
-//     ){
-//     filename
-//     }
-//   }
-// `
+export const GET_USER = gql`
+  query me {
+    me {
+      id
+      email
+    }
+  }
+`
+export const GET_CARS = gql`
+  query GET_CARS {
+    cars {
+      brand
+      model
+      productionYear
+      engineCapacity
+      enginePower
+      available
+      image
+      date
+    }
+  }
+`;
 export const ADD_CAR = gql`
   mutation ADD_CAR(
     $brand: String!
@@ -44,9 +55,8 @@ export const ADD_CAR = gql`
 export const LOGIN_USER = gql`
   mutation LOGIN_USER($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      user {
-        id
-      }
+      id
+      email
     }
   }
 `;

@@ -6,20 +6,24 @@ const typeDef = gql`
   }
 
   extend type Mutation {
-    login(email: String!, password: String!): AuthData
+    login(email: String!, password: String!): LoggedUser
     signup(email: String!, password: String!): User
   }
 
+  type LoggedUser {
+    id: ID!
+    email: String!
+  }
   type AuthData {
     user: User
     token: String!
     tokenExpiration: String!
   }
-
   type User {
     id: ID!
     email: String!
     password: String!
+    jwt: String
   }
 `;
 

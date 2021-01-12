@@ -26,10 +26,14 @@ const CarBox = ({
   imgSrc,
 }: CarProps) => {
   const capacity = engineCapacity.includes(".") ? "l" : "cm3";
-  console.log(imgSrc);
+
   return (
     <CarBoxContainer>
-      <CarImg source={{ uri: imgSrc }} />
+      <CarImg
+        source={{
+          uri: imgSrc,
+        }}
+      />
       <DescriptionWrapper>
         <Brand>{brand}</Brand>
         <Description>

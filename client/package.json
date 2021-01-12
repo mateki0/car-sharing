@@ -1,5 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "proxy": "http://192.168.1.9:5000",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -23,6 +24,7 @@
     "expo": "~40.0.0",
     "expo-image-picker": "~9.2.0",
     "expo-permissions": "~10.0.0",
+    "expo-secure-store": "~9.3.0",
     "expo-status-bar": "~1.0.3",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",

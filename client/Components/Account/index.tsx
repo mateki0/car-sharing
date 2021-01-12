@@ -5,16 +5,18 @@ import LogoutText from "./styled/LogoutText";
 import AsyncStorage from "@react-native-community/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { useApolloClient } from "@apollo/client";
-import App from "../../App";
+import { UserContext } from "../../src/contexts/UserContext";
 
 const Account = () => {
+  const { handleUserChange } = React.useContext(UserContext);
   const client = useApolloClient();
   const Navigation = useNavigation();
   const handleLogout = async () => {
     client.resetStore();
     try {
-      await AsyncStorage.removeItem("token");
-      Navigation.navigate("Home");
+      await AsyncStorage.removeItem("x-token");
+      handleUserChange("");
+      Navigation.navigate("Samochody");
     } catch (error) {
       console.log(error);
     }

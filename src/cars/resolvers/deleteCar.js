@@ -1,4 +1,4 @@
-const Car = require("./car");
+const Car = require("../carSchema");
 
 const deleteCar = async (_, { carId }) => {
   const car = await Car.deleteOne({

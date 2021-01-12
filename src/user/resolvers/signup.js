@@ -1,6 +1,6 @@
 const { UserInputError } = require("apollo-server-express");
 const bcrypt = require("bcrypt");
-const User = require("./user");
+const User = require("../userSchema");
 
 const SALT_ROUNDS = 12;
 

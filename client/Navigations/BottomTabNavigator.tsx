@@ -1,5 +1,6 @@
 import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Login from "../screens/Login";
 import Home from "../screens/Home";
@@ -7,11 +8,17 @@ import Register from "../screens/Register";
 import AsyncStorage from "@react-native-community/async-storage";
 import AddCar from "../screens/AddCar";
 import AccountScreen from "../screens/AccountScreen";
+import { UserContext } from "../src/contexts/UserContext";
+
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
+  const [isLogged, setIsLogged] = React.useState(false);
+  const { user } = React.useContext(UserContext);
   const [token, setToken] = React.useState<string | null>("");
-
+  React.useEffect(() => {
+    user && user.length > 0 ? setIsLogged(true) : setIsLogged(false);
+  }, [user]);
   const getToken = React.useCallback(async () => {
     try {
       const value = await AsyncStorage.getItem("token");
@@ -49,13 +56,20 @@ const BottomTabNavigator = () => {
         inactiveTintColor: "gray",
       }}
     >
-      <Tab.Screen name="Samochody" component={Home} />
-      <Tab.Screen
-        name={token ? "Konto" : "Zaloguj się"}
-        component={token ? AccountScreen : Login}
-      />
-      <Tab.Screen name="Dodaj samochód" component={AddCar} />
-      <Tab.Screen name={"Zarejestruj się"} component={Register} />
+      {isLogged ? (
+        <>
+          <Tab.Screen name="Samochody" component={Home} />
+          <Tab.Screen name="Konto" component={AccountScreen} />
+          <Tab.Screen name="Dodaj samochód" component={AddCar} />
+          <Tab.Screen name="Zarejestruj się" component={Register} />
+        </>
+      ) : (
+        <>
+          <Tab.Screen name="Samochody" component={Home} />
+          <Tab.Screen name="Zaloguj się" component={Login} />
+          <Tab.Screen name="Zarejestruj się" component={Register} />
+        </>
+      )}
     </Tab.Navigator>
   );
 };

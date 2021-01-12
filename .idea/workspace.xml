@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d2d1176d-ae2c-44b9-8399-7485bb3539c1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.expo/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/Components/AddCarForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/Components/AddCarForm/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/Components/CarBox/car.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/Components/CarBox/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/Components/CarBox/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/Navigations/BottomTabNavigator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/Navigations/BottomTabNavigator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/screens/AddCar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/screens/AddCar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/screens/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/screens/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utils/initApollo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/initApollo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utils/mutations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/mutations.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/KUDVNIWV5-picture-1609782528846" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/mVX7cXeX1-picture-1609782352183" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/y43OZvTOw-picture-1609782024864" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cars/resolvers/addCar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cars/resolvers/addCar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cars/resolvers/car.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cars/resolvers/cars.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cars/resolvers/cars.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cars/resolvers/deleteCar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cars/resolvers/deleteCar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cars/typeDef.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cars/typeDef.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/resolvers/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/resolvers/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/resolvers/me.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/resolvers/me.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/resolvers/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/resolvers/signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/resolvers/user.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/context.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/context.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1mjg3RJ3wukc6i5IwzoLmlmh8ib" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d2d1176d-ae2c-44b9-8399-7485bb3539c1" name="Default Changelist" comment="" />
+      <created>1610012214170</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1610012214170</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2280" y="140" width="1200" height="800" key="AVDManager" timestamp="1610012473761">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2280" y="140" width="1200" height="800" key="AVDManager/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1610012473761" />
+    <state x="2369" y="175" key="SettingsEditor" timestamp="1610012374619">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2369" y="175" key="SettingsEditor/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1610012374619" />
+    <state x="2544" y="248" key="run.anything.popup" timestamp="1610012472556">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2544" y="248" key="run.anything.popup/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1610012472556" />
+  </component>
+</project>

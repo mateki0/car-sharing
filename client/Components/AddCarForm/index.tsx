@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TouchableOpacity, Text } from "react-native";
+import { Text } from "react-native";
 import ButtonText from "../AccountForms/styled/ButtonText";
 import Input from "../AccountForms/styled/Input";
 import Label from "../AccountForms/styled/Label";
@@ -16,6 +16,8 @@ import { Alert } from "react-native";
 import AddImage from "./styled/AddImage";
 import { ReactNativeFile } from "apollo-upload-client";
 import * as mime from "react-native-mime-types";
+
+import ImagePreview from "./styled/ImagePreview";
 interface CarProps {
   brand: string;
   model: string;
@@ -32,7 +34,7 @@ const AddCarForm = () => {
   });
 
   const [file, setFile] = React.useState("");
-  const generateRNFile = (uri, name) => {
+  const generateRNFile = (uri: string, name: string) => {
     return uri
       ? new ReactNativeFile({
           uri,
@@ -88,7 +90,7 @@ const AddCarForm = () => {
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
         aspect: [3, 3],
-        quality: 1,
+        quality: 0.3,
       });
 
       if (!image.cancelled) {
@@ -97,17 +99,6 @@ const AddCarForm = () => {
     }
   };
 
-  // const onUploadPress = async () => {
-  //   const file = generateRNFile(image, `picture-${Date.now()}`);
-  //   try {
-  //     await addImage({
-  //       variables: { file: file },
-  //     });
-  //     console.log(file);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   return (
     <AddCarContainer>
       <Label>Marka</Label>
@@ -234,7 +225,7 @@ const AddCarForm = () => {
       <AddImage onPress={takeImage}>
         <ButtonText>{file ? "Zmień zdjęcie" : "Dodaj zdjęcie"}</ButtonText>
       </AddImage>
-
+      {file ? <ImagePreview source={{ uri: file }} /> : <Text></Text>}
       <SubmitButton onPress={handleSubmit(handleAdd)}>
         <ButtonText>Dodaj samochód</ButtonText>
       </SubmitButton>

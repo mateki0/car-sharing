@@ -1,4 +1,4 @@
-const Car = require("./car");
+const Car = require("../carSchema");
 
 const cars = async (_, {}) => {
   const cars = await Car.find({}, (err, cars) => {
