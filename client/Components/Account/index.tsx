@@ -11,16 +11,21 @@ import { useQuery } from "@apollo/client";
 import { GET_USER_CARS } from "../../src/utils/mutations";
 import CarBox from "../CarBox";
 import { CarsProps } from "../../screens/Home";
-const Account = () => {
-  const { handleUserChange, user } = React.useContext(UserContext);
-  const { error, loading, data } = useQuery(GET_USER_CARS);
+import YourCars from "./styled/YourCars";
 
+const Account = () => {
+  const { handleUserChange } = React.useContext(UserContext);
+  const { error, loading, data } = useQuery(GET_USER_CARS);
   const client = useApolloClient();
   const Navigation = useNavigation();
+
   const handleLogout = async () => {
     client.resetStore();
     try {
-      handleUserChange("");
+      handleUserChange({
+        email: "",
+        id: "",
+      });
       Navigation.navigate("Samochody");
     } catch (error) {
       console.log(error);
@@ -30,14 +35,13 @@ const Account = () => {
     console.log(error.message);
   }
   if (loading) return <Text>"Loading..."</Text>;
-  console.log(data);
+
   return (
     <AccountWrapper>
-      <LogoutButton onPress={handleLogout}>
-        <LogoutText>Wyloguj się</LogoutText>
-      </LogoutButton>
+      <YourCars>Twoje samochody do wypożyczenia</YourCars>
       {data.getUserCars.map((car: CarsProps, index: number) => (
         <CarBox
+          id={car.id}
           key={index}
           brand={car.brand}
           model={car.model}
@@ -46,8 +50,13 @@ const Account = () => {
           productionYear={car.productionYear}
           available={car.available}
           imgSrc={car.image}
+          isAccountBox={true}
         />
       ))}
+
+      <LogoutButton onPress={handleLogout}>
+        <LogoutText>Wyloguj się</LogoutText>
+      </LogoutButton>
     </AccountWrapper>
   );
 };

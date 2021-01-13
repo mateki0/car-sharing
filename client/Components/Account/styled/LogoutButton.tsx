@@ -6,6 +6,6 @@ const LogoutButton = styled.TouchableOpacity`
   width: 80%;
   align-items: center;
   border-radius: 5px;
-  margin-bottom: 15px;
+  margin-top: 15px;
 `;
 export default LogoutButton;

@@ -11,6 +11,24 @@ export const GET_USER = gql`
 export const GET_CARS = gql`
   query GET_CARS {
     cars {
+      id
+      brand
+      model
+      productionYear
+      engineCapacity
+      enginePower
+      available
+      image
+      date
+      owner
+      borrowedTo
+    }
+  }
+`;
+export const GET_USER_CARS = gql`
+  query GET_USER_CARS {
+    getUserCars{
+      id
       brand
       model
       productionYear
@@ -21,18 +39,32 @@ export const GET_CARS = gql`
       date
     }
   }
-`;
-export const GET_USER_CARS = gql`
-  query GET_USER_CARS {
-    getUserCars{
+`
+export const CHECK_BORROW_DATE = gql`
+  mutation CHECK_BORROW_DATE{
+    checkBorrowDate{
       brand
-      model
-      productionYear
-      engineCapacity
-      enginePower
-      available
-      image
-      date
+    }
+  }
+`
+export const BORROW_CAR = gql`
+  mutation BORROW_CAR(
+    $id: String!
+    $borrowedBy:String!
+    $borrowedFrom:String!
+    $borrowedTo: String!
+  ) {
+    borrowCar(id:$id, borrowedBy:$borrowedBy, borrowedFrom:$borrowedFrom, borrowedTo:$borrowedTo){
+      brand
+    }
+  }
+`
+export const DELETE_CAR = gql`
+  mutation DELETE_CAR(
+    $carId:String!
+  ){
+    deleteCar(carId:$carId){
+      brand
     }
   }
 `

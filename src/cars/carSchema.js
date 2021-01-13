@@ -36,6 +36,15 @@ const carSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  borrowedBy: {
+    type: String,
+  },
+  borrowedFrom: {
+    type: Date,
+  },
+  borrowedTo: {
+    type: Date,
+  },
 });
 
 const Car = mongoose.model("Car", carSchema);

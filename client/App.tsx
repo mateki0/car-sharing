@@ -1,5 +1,4 @@
 import React from "react";
-
 import { ApolloProvider } from "@apollo/client";
 import { NavigationContainer } from "@react-navigation/native";
 import initApollo from "./src/utils/initApollo";

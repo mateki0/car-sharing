@@ -17,10 +17,18 @@ const typeDef = gql`
       date: String
       owner: String!
     ): Car!
-    deleteCar(carID: String!): Car
+    deleteCar(carId: String!): Car
+    borrowCar(
+      id: String!
+      borrowedBy: String!
+      borrowedFrom: String!
+      borrowedTo: String!
+    ): Car
+    checkBorrowDate: Car
   }
 
   type Car {
+    id: ID
     brand: String
     model: String
     productionYear: String
@@ -30,6 +38,7 @@ const typeDef = gql`
     image: String
     date: String
     owner: String
+    borrowedTo: String
   }
 `;
 module.exports = {

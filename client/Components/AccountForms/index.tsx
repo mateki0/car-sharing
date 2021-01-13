@@ -16,20 +16,20 @@ interface UseFormProps {
 }
 
 const AccountForms = ({ isLogin }: { isLogin?: boolean }) => {
+  const navigation = useNavigation();
   const { handleUserChange } = React.useContext(UserContext);
   const [insertUser] = useMutation(INSERT_USER, {
     onCompleted: () => navigation.navigate("Login"),
   });
   const [loginUser] = useMutation(LOGIN_USER, {
     onCompleted: ({ login }) => {
-      handleUserChange(login.id);
+      handleUserChange({ email: login.email, id: login.id });
       navigation.navigate("Samochody");
     },
   });
   const [editable, setEditable] = React.useState(false);
   const { control, errors, register, handleSubmit } = useForm<UseFormProps>();
 
-  const navigation = useNavigation();
   React.useEffect(() => {
     setTimeout(() => {
       setEditable(true);

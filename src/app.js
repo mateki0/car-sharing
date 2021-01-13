@@ -7,7 +7,6 @@ const {
   isAuthenticatedDirective,
 } = require("./user/directives/is-authenticated");
 const config = require("./config");
-const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const typeDef = gql`
   type Query

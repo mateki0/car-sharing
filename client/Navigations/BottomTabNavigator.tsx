@@ -7,26 +7,12 @@ import Home from "../screens/Home";
 import Register from "../screens/Register";
 import AddCar from "../screens/AddCar";
 import AccountScreen from "../screens/AccountScreen";
-import { useQuery } from "@apollo/client";
-import { GET_USER } from "../src/utils/mutations";
 import { UserContext } from "../src/contexts/UserContext";
+
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
-  const [isLogged, setIsLogged] = React.useState(false);
-  const { loading, error, data } = useQuery(GET_USER);
   const { user } = React.useContext(UserContext);
-  if (loading) {
-    return <Text>Loading...</Text>;
-  }
-  if (error) {
-    console.log("error");
-  }
-  // pobrac usera z query, wrzucic do contextu, wyciagnac w add car
-
-  React.useEffect(() => {
-    user ? setIsLogged(true) : setIsLogged(false);
-  }, [user]);
 
   return (
     <Tab.Navigator
@@ -53,7 +39,7 @@ const BottomTabNavigator = () => {
         inactiveTintColor: "gray",
       }}
     >
-      {isLogged ? (
+      {user["email"] ? (
         <>
           <Tab.Screen name="Samochody" component={Home} />
           <Tab.Screen name="Konto" component={AccountScreen} />

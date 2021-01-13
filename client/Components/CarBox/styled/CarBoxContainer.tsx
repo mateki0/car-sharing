@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-const CarBoxContainer = styled.View`
+const CarBoxContainer = styled.TouchableOpacity`
   flex-direction: row;
   width: 100%;
   justify-content: space-around;

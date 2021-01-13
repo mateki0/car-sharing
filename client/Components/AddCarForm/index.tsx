@@ -31,7 +31,7 @@ const AddCarForm = () => {
   const { control, errors, register, handleSubmit } = useForm<CarProps>();
   const currentYear = new Date().getFullYear();
   const { user } = React.useContext(UserContext);
-  console.log("user add Car", user);
+
   const [addCar] = useMutation(ADD_CAR, {
     onCompleted: () => navigation.navigate("AccountScreen"),
   });
