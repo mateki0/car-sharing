@@ -11,7 +11,13 @@ import { useMutation } from "@apollo/client";
 import { DELETE_CAR } from "../../src/utils/mutations";
 import BorrowButton from "../CarBorrowModal/styled/BorrowButton";
 import ButtonText from "../AccountForms/styled/ButtonText";
-import { Text } from "react-native";
+import { Modal, Text } from "react-native";
+import DeleteButtonsContainer from "./styled/DeleteButtonsContainer";
+import DeleteModal from "./DeleteModal";
+import AvailableWrapper from "./styled/AvailableWrapper";
+import CarImgWrapper from "./styled/CarImgWrapper";
+import LogoutButton from "../Account/styled/LogoutButton";
+import LogoutText from "../Account/styled/LogoutText";
 interface CarProps {
   id?: string;
   brand: string;
@@ -24,6 +30,7 @@ interface CarProps {
   owner?: string;
   borrowedTo?: string;
   isAccountBox?: boolean;
+  imagePublicId?: string;
 }
 
 const CarBox = ({
@@ -38,9 +45,11 @@ const CarBox = ({
   owner,
   borrowedTo,
   isAccountBox,
+  imagePublicId,
 }: CarProps) => {
   const [deleteCar] = useMutation(DELETE_CAR);
   const [isModalOpened, setModalOpened] = React.useState(false);
+  const [isDeleteModalOpened, setDeleteModalOpened] = React.useState(false);
   const capacity = engineCapacity.includes(".") ? "l" : "cm3";
 
   const handleModalOpen = () => {
@@ -58,23 +67,33 @@ const CarBox = ({
   };
 
   const handleDeleteCar = () => {
-    console.log(id);
-    deleteCar({ variables: { carId: id } });
+    deleteCar({ variables: { carId: id, imagePublicId } });
+    handleDeleteModalClose();
+  };
+
+  const handleDeleteModalOpen = () => {
+    setDeleteModalOpened(true);
+  };
+  const handleDeleteModalClose = () => {
+    setDeleteModalOpened(false);
   };
   return (
     <>
-      <CarBoxContainer onPress={handleModalOpen}>
-        <CarImg
-          source={{
-            uri: imgSrc,
-          }}
-        />
+      <CarBoxContainer
+        onPress={isAccountBox ? handleDeleteModalOpen : handleModalOpen}
+      >
+        <CarImgWrapper>
+          <CarImg
+            source={{
+              uri: imgSrc,
+            }}
+          />
+        </CarImgWrapper>
         <DescriptionWrapper>
           <Brand>{brand}</Brand>
+          <Description>{model}</Description>
           <Description>
-            {model +
-              " " +
-              engineCapacity +
+            {engineCapacity +
               "" +
               capacity +
               " " +
@@ -83,15 +102,29 @@ const CarBox = ({
               productionYear}
           </Description>
         </DescriptionWrapper>
-        <Available available={available}></Available>
-        {isAccountBox ? (
-          <BorrowButton onPress={handleDeleteCar}>
-            <ButtonText>X</ButtonText>
-          </BorrowButton>
-        ) : (
-          <Text></Text>
-        )}
+        <AvailableWrapper>
+          <Available available={available}></Available>
+        </AvailableWrapper>
       </CarBoxContainer>
+      {isAccountBox ? (
+        <>
+          <DeleteButtonsContainer>
+            <LogoutButton onPress={handleDeleteModalOpen}>
+              <LogoutText>Usuń ten samochód</LogoutText>
+            </LogoutButton>
+          </DeleteButtonsContainer>
+
+          <DeleteModal
+            brand={brand}
+            model={model}
+            isDeleteModalOpened={isDeleteModalOpened}
+            handleDeleteModalClose={handleDeleteModalClose}
+            handleDeleteCar={handleDeleteCar}
+          />
+        </>
+      ) : (
+        <Text></Text>
+      )}
       <CarBorrowModal
         id={id}
         brand={brand}

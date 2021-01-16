@@ -1,14 +1,14 @@
 import React from "react";
 import AccountForms from "../Components/AccountForms";
 import Heading from "../Components/Heading";
-import ScreenWrapper from "./styled/ScreenWrapper";
+import Layout from "../Components/Layout";
 
 const Login = () => {
   return (
-    <ScreenWrapper>
+    <Layout>
       <Heading text="Zaloguj się" />
       <AccountForms isLogin={true} />
-    </ScreenWrapper>
+    </Layout>
   );
 };
 export default Login;

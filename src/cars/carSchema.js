@@ -28,6 +28,9 @@ const carSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  imagePublicId: {
+    type: String,
+  },
   date: {
     type: Date,
     default: Date.now,

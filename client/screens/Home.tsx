@@ -2,11 +2,11 @@ import React from "react";
 import { Text, View } from "react-native";
 import CarBox from "../Components/CarBox";
 import Heading from "../Components/Heading";
-import ScreenWrapper from "./styled/ScreenWrapper";
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { GET_CARS, CHECK_BORROW_DATE } from "../src/utils/mutations";
 import AvailableFilter from "../Components/AvailableFilter/AvailableFilter";
+import Layout from "../Components/Layout";
 
 export interface CarsProps {
   id: string;
@@ -20,6 +20,7 @@ export interface CarsProps {
   image: string;
   owner: string;
   borrowedTo: string;
+  imagePublicId?: string;
 }
 const Home = () => {
   const { loading, error, data } = useQuery(GET_CARS);
@@ -48,7 +49,7 @@ const Home = () => {
       : data.cars;
 
     return (
-      <ScreenWrapper>
+      <Layout>
         <Heading text="Ostatnio dodane samochody" />
         <AvailableFilter
           availableOnly={availableOnly}
@@ -70,7 +71,7 @@ const Home = () => {
             />
           </View>
         ))}
-      </ScreenWrapper>
+      </Layout>
     );
   } else {
     return <Text>Loading</Text>;

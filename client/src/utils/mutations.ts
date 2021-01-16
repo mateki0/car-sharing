@@ -36,7 +36,9 @@ export const GET_USER_CARS = gql`
       enginePower
       available
       image
+      imagePublicId
       date
+      borrowedBy
     }
   }
 `
@@ -62,8 +64,9 @@ export const BORROW_CAR = gql`
 export const DELETE_CAR = gql`
   mutation DELETE_CAR(
     $carId:String!
+    $imagePublicId:String!
   ){
-    deleteCar(carId:$carId){
+    deleteCar(carId:$carId, imagePublicId:$imagePublicId){
       brand
     }
   }

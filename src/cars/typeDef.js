@@ -14,10 +14,11 @@ const typeDef = gql`
       enginePower: String!
       available: Boolean!
       image: Upload
+      imagePublicId: String
       date: String
       owner: String!
     ): Car!
-    deleteCar(carId: String!): Car
+    deleteCar(carId: String!, imagePublicId: String!): Car
     borrowCar(
       id: String!
       borrowedBy: String!
@@ -38,7 +39,9 @@ const typeDef = gql`
     image: String
     date: String
     owner: String
+    borrowedBy: String
     borrowedTo: String
+    imagePublicId: String
   }
 `;
 module.exports = {

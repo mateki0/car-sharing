@@ -14,6 +14,7 @@ import { useMutation } from "@apollo/client";
 import { BORROW_CAR } from "../../src/utils/mutations";
 import { UserContext } from "../../src/contexts/UserContext";
 import { useNavigation } from "@react-navigation/native";
+import ModelBrand from "./styled/ModelBrand";
 interface ModalProps {
   isModalOpened: boolean;
   brand: string;
@@ -78,52 +79,50 @@ const CarBorrowModal = ({
         animationType="slide"
         visible={isModalOpened}
         onRequestClose={handleModalClose}
+        transparent={true}
       >
         <ModalInnerWrapper>
           <DateButtonsWrapper>
-            <ButtonText>
+            <ModelBrand>
               {brand} {model}
-            </ButtonText>
+            </ModelBrand>
           </DateButtonsWrapper>
           <DateButtonsWrapper>
             <DateButton onPress={() => setPickerFromVisible(true)}>
-              <ButtonText>Wybierz Datę</ButtonText>
+              <ButtonText>Wypożycz od</ButtonText>
             </DateButton>
-
-            <DateButton onPress={() => setPickerToVisible(true)}>
-              <ButtonText>Wybierz Datę</ButtonText>
-            </DateButton>
-          </DateButtonsWrapper>
-          <DateWrapper>
             <BorrowDate>{moment(dateFrom).format("DD-MM-YYYY")}</BorrowDate>
-            <BorrowDate>Do</BorrowDate>
+            <DateButton onPress={() => setPickerToVisible(true)}>
+              <ButtonText>Wypożycz do</ButtonText>
+            </DateButton>
             <BorrowDate>{moment(dateTo).format("DD-MM-YYYY")}</BorrowDate>
-          </DateWrapper>
+          </DateButtonsWrapper>
+
+          {pickerFromVisible ? (
+            <DateTimePicker
+              value={dateFrom}
+              display="default"
+              onChange={handleDateFromChange}
+              minimumDate={dateFrom}
+            />
+          ) : (
+            <Text></Text>
+          )}
+          {pickerToVisible ? (
+            <DateTimePicker
+              value={dateTo}
+              display="default"
+              onChange={handleDateToChange}
+              minimumDate={minimumDate}
+              maximumDate={maximumDate}
+            />
+          ) : (
+            <Text></Text>
+          )}
+          <BorrowButton onPress={handleBorrowCar}>
+            <ButtonText>Wypożycz</ButtonText>
+          </BorrowButton>
         </ModalInnerWrapper>
-        {pickerFromVisible ? (
-          <DateTimePicker
-            value={dateFrom}
-            display="default"
-            onChange={handleDateFromChange}
-            minimumDate={dateFrom}
-          />
-        ) : (
-          <Text></Text>
-        )}
-        {pickerToVisible ? (
-          <DateTimePicker
-            value={dateTo}
-            display="default"
-            onChange={handleDateToChange}
-            minimumDate={minimumDate}
-            maximumDate={maximumDate}
-          />
-        ) : (
-          <Text></Text>
-        )}
-        <BorrowButton onPress={handleBorrowCar}>
-          <ButtonText>Wypożycz</ButtonText>
-        </BorrowButton>
       </Modal>
     </ModalContainer>
   );

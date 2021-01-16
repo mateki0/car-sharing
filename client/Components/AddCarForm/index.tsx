@@ -2,7 +2,6 @@ import * as React from "react";
 import { Text } from "react-native";
 import ButtonText from "../AccountForms/styled/ButtonText";
 import Input from "../AccountForms/styled/Input";
-import Label from "../AccountForms/styled/Label";
 import SubmitButton from "../AccountForms/styled/SubmitButton";
 import AddCarContainer from "./styled/AddCarContainer";
 import { useNavigation } from "@react-navigation/native";
@@ -60,7 +59,7 @@ const AddCarForm = () => {
           enginePower,
           available,
           image,
-          owner: user,
+          owner: user["id"],
         },
       });
     } catch (error) {
@@ -105,7 +104,6 @@ const AddCarForm = () => {
 
   return (
     <AddCarContainer>
-      <Label>Marka</Label>
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
@@ -127,7 +125,7 @@ const AddCarForm = () => {
       {errors.brand && (
         <ErrorText>To pole jest wymagane (3-25 znaków)</ErrorText>
       )}
-      <Label>Model</Label>
+
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
@@ -149,7 +147,7 @@ const AddCarForm = () => {
       {errors.model && (
         <ErrorText>To pole jest wymagane (1-25 znaków)</ErrorText>
       )}
-      <Label>Pojemność silnika</Label>
+
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
@@ -173,14 +171,14 @@ const AddCarForm = () => {
       {errors.engineCapacity && (
         <ErrorText>{errors.engineCapacity.message}</ErrorText>
       )}
-      <Label>Moc(km)</Label>
+
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
           <Input
             onChangeText={(value) => onChange(value)}
             value={value}
-            placeholder="Moc"
+            placeholder="Moc(km)"
             onBlur={onBlur}
             keyboardType="numeric"
           />
@@ -197,7 +195,7 @@ const AddCarForm = () => {
       {errors.enginePower && (
         <ErrorText>{errors.enginePower.message}</ErrorText>
       )}
-      <Label>Rocznik samochodu</Label>
+
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
@@ -223,9 +221,9 @@ const AddCarForm = () => {
       {errors.productionYear && (
         <ErrorText>{errors.productionYear.message}</ErrorText>
       )}
-      <Label>
+      <ButtonText>
         {file ? "Dodano zdjecie!" : "Dodaj zdjęcie swojego samochodu"}
-      </Label>
+      </ButtonText>
       <AddImage onPress={takeImage}>
         <ButtonText>{file ? "Zmień zdjęcie" : "Dodaj zdjęcie"}</ButtonText>
       </AddImage>

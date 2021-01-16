@@ -1,11 +1,11 @@
 import styled from "styled-components/native";
 
 const Available = styled.Text<{ available: boolean }>`
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
   position: relative;
-  background-color: ${(props) => (props.available ? "#1fcf00" : "#cf2200")};
+  background-color: ${(props) => (props.available ? "#23C702" : "#FF1100")};
   align-self: center;
-  border-radius: 7.5px;
+  border-radius: 9px;
 `;
 export default Available;

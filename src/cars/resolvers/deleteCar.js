@@ -1,6 +1,7 @@
 const Car = require("../carSchema");
-
-const deleteCar = async (_, { carId }) => {
+const processDelete = require("../../utils/cloudinaryDelete");
+const deleteCar = async (_, { carId, imagePublicId }) => {
+  processDelete(imagePublicId);
   const car = await Car.deleteOne({
     _id: carId,
   });

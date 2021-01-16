@@ -1,9 +1,11 @@
 import styled from "styled-components/native";
 
 const DateButtonsWrapper = styled.View`
-  flex-direction: row;
-  justify-content: space-around;
-  margin: 10px 0;
+  width: 100%;
+  margin: 10px auto;
+  align-items: center;
+  padding: 20px;
+  background-color: #000224;
 `;
 
 export default DateButtonsWrapper;

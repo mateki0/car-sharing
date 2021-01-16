@@ -1,14 +1,14 @@
 import React from "react";
 import AccountForms from "../Components/AccountForms";
 import Heading from "../Components/Heading";
-import ScreenWrapper from "./styled/ScreenWrapper";
+import Layout from "../Components/Layout";
 
 const Register = () => {
   return (
-    <ScreenWrapper>
+    <Layout>
       <Heading text="Załóż konto" />
       <AccountForms />
-    </ScreenWrapper>
+    </Layout>
   );
 };
 export default Register;

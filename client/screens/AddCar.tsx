@@ -1,14 +1,15 @@
 import * as React from "react";
-import ScreenWrapper from "./styled/ScreenWrapper";
+
 import Heading from "../Components/Heading";
 import AddCarForm from "../Components/AddCarForm";
+import Layout from "../Components/Layout";
 
 const AddCar = () => {
   return (
-    <ScreenWrapper>
+    <Layout>
       <Heading text="Dodaj swój samochód" />
       <AddCarForm />
-    </ScreenWrapper>
+    </Layout>
   );
 };
 

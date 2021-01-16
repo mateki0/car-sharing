@@ -1,7 +1,8 @@
 import styled from "styled-components/native";
 
 const AddImage = styled.TouchableOpacity`
-  padding: 10px 20px;
-  background-color: #f5f5f5;
+  margin-top: 10px;
+  padding: 15px 20px;
+  background-color: #252cab;
 `;
 export default AddImage;

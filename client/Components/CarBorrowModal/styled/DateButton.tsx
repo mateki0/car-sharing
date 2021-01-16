@@ -5,6 +5,7 @@ const DateButton = styled.TouchableOpacity`
   border: none;
   border-radius: 8px;
   align-items: center;
-  background-color: #3e3e3e;
+  background-color: #252cab;
+  margin: 15px 0;
 `;
 export default DateButton;

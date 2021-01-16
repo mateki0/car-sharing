@@ -21,7 +21,8 @@ const addCar = async (
     engineCapacity,
     enginePower,
     available,
-    image: await processUpload(image),
+    image: await (await processUpload(image)).resultUrl,
+    imagePublicId: await (await processUpload(image)).imagePublicId,
     owner,
   });
 

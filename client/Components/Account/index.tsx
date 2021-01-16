@@ -14,7 +14,7 @@ import { CarsProps } from "../../screens/Home";
 import YourCars from "./styled/YourCars";
 
 const Account = () => {
-  const { handleUserChange } = React.useContext(UserContext);
+  const { handleUserChange, user } = React.useContext(UserContext);
   const { error, loading, data } = useQuery(GET_USER_CARS);
   const client = useApolloClient();
   const Navigation = useNavigation();
@@ -35,25 +35,44 @@ const Account = () => {
     console.log(error.message);
   }
   if (loading) return <Text>"Loading..."</Text>;
-
+  console.log(data.getUserCars);
   return (
     <AccountWrapper>
       <YourCars>Twoje samochody do wypożyczenia</YourCars>
-      {data.getUserCars.map((car: CarsProps, index: number) => (
-        <CarBox
-          id={car.id}
-          key={index}
-          brand={car.brand}
-          model={car.model}
-          engineCapacity={car.engineCapacity}
-          enginePower={car.enginePower}
-          productionYear={car.productionYear}
-          available={car.available}
-          imgSrc={car.image}
-          isAccountBox={true}
-        />
-      ))}
-
+      {data.getUserCars
+        .filter((a) => a.borrowedBy !== user["id"])
+        .map((car: CarsProps, index: number) => (
+          <CarBox
+            id={car.id}
+            key={index}
+            brand={car.brand}
+            model={car.model}
+            engineCapacity={car.engineCapacity}
+            enginePower={car.enginePower}
+            productionYear={car.productionYear}
+            available={car.available}
+            imgSrc={car.image}
+            imagePublicId={car.imagePublicId}
+            isAccountBox={true}
+          />
+        ))}
+      <YourCars>Aktualnie wypożyczasz</YourCars>
+      {data.getUserCars
+        .filter((a) => a.borrowedBy === user["id"])
+        .map((car: CarsProps, index: number) => (
+          <CarBox
+            id={car.id}
+            key={index}
+            brand={car.brand}
+            model={car.model}
+            engineCapacity={car.engineCapacity}
+            enginePower={car.enginePower}
+            productionYear={car.productionYear}
+            available={car.available}
+            imgSrc={car.image}
+            imagePublicId={car.imagePublicId}
+          />
+        ))}
       <LogoutButton onPress={handleLogout}>
         <LogoutText>Wyloguj się</LogoutText>
       </LogoutButton>

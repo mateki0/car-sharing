@@ -5,6 +5,7 @@ cloudinary.config({
   api_key: config.API_KEY,
   api_secret: config.API_SECRET,
 });
+
 const processUpload = async (upload) => {
   const { createReadStream } = await upload;
   const stream = createReadStream();
@@ -14,9 +15,12 @@ const processUpload = async (upload) => {
         const streamLoad = cloudinary.uploader.upload_stream(
           (error, result) => {
             if (result) {
-              resultUrl = result.secure_url;
+              urls = {
+                resultUrl: result.secure_url,
+                imagePublicId: result.public_id,
+              };
               resultSecureUrl = result.secure_url;
-              resolve(resultUrl);
+              resolve(urls);
             } else {
               reject(error);
             }
@@ -29,6 +33,7 @@ const processUpload = async (upload) => {
     }
   };
   await cloudinaryUpload({ stream });
-  return resultUrl;
+
+  return urls;
 };
 module.exports = processUpload;
