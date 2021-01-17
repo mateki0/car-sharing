@@ -8,10 +8,20 @@ const testCar = {
   engineCapacity: "2.0",
   enginePower: "155km",
   id: "xyz",
+  available: true,
+  owner: "user123",
 };
 const addCar = (
-  { brand, model, productionYear, engineCapacity, enginePower },
-  returnValues = `{brand,model,productionYear,engineCapacity,enginePower}`
+  {
+    brand,
+    model,
+    productionYear,
+    engineCapacity,
+    enginePower,
+    available,
+    owner,
+  },
+  returnValues = `{brand,model,productionYear,engineCapacity,enginePower,available,owner}`
 ) => {
   return request({
     query: `
@@ -22,6 +32,8 @@ const addCar = (
           productionYear: "${productionYear}",
           engineCapacity: "${engineCapacity}",
           enginePower: "${enginePower}",
+          available: "${available},
+          owner: "${owner},
         ) ${returnValues}
       }
     `,
@@ -47,25 +59,24 @@ describe("addCar", () => {
       });
     });
   });
-  // describe("deleteCar", () => {
-  //   describe("delete car", () => {
-  //     it("should delete car", () => {
-  //       return request({
-  //         query: `
-  //         mutation {
-  //           deleteCar(carId:"${testCar.id}"){
-  //             car {
-  //               id
-  //             }
-  //           }
-  //         }
-  //       `,
-  //       })
-  //         .expect((res) => {
-  //           expect(res.body).toHaveProperty("data.deleteCar.id");
-  //         })
-  //         .expect(200);
-  //     });
-  //   });
-  // });
+
+  describe("delete car", () => {
+    it("should delete car", () => {
+      return request({
+        query: `
+          mutation {
+            deleteCar(carId:"${testCar.id}"){
+              car {
+                id
+              }
+            }
+          }
+        `,
+      })
+        .expect((res) => {
+          expect(res.body).toHaveProperty("data.deleteCar.id");
+        })
+        .expect(200);
+    });
+  });
 });

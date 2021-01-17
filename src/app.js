@@ -32,13 +32,7 @@ app.use((req, _, next) => {
   } catch {}
   next();
 });
-// app.use(
-//   session({
-//     secret: "asd",
-//     resave: false,
-//     saveUninitialized: false,
-//   })
-// );
+
 server.applyMiddleware({
   path: "/",
   app,
