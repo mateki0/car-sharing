@@ -1,12 +1,13 @@
 {
   "expo": {
-    "name": "client",
+    "name": "Car sharing app",
+    "description": "App for sharing your car with others",
     "slug": "client",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./logo.jpg",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./logo.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,7 +22,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./logo.jpg",,
         "backgroundColor": "#FFFFFF"
       }
     },
