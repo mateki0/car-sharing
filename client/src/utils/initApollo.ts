@@ -6,8 +6,7 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import {createUploadLink} from 'apollo-upload-client'
-import { setContext } from '@apollo/client/link/context';
-import * as SecureStore from 'expo-secure-store';
+
 const initApollo = () => {
   const httpLink = createUploadLink({
     fetch: fetch as any,

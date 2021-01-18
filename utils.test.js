@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.set("useFindAndModify", false);
 const config = require("./src/config");
 const getMongo = ({ mongoUrl, dropDatabase = true, connectionWhitelist }) => {
   if (mongoose.connection.host) {

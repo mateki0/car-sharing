@@ -1,5 +1,6 @@
 const expect = require("expect");
 const { request } = require("../utils/test");
+const borrowCar = require("./resolvers/borrowCar");
 
 const testCar = {
   brand: "ford",
@@ -7,9 +8,13 @@ const testCar = {
   productionYear: "2010",
   engineCapacity: "2.0",
   enginePower: "155km",
-  id: "xyz",
   available: true,
   owner: "user123",
+  imagePublicId: "1231231",
+  id: "5fffebd52484bb1e06bd1d5d",
+  borrowedBy: "asdxyz",
+  borrowedFrom: "1234123654",
+  borrowedTo: "123412365412",
 };
 const addCar = (
   {
@@ -20,8 +25,9 @@ const addCar = (
     enginePower,
     available,
     owner,
+    imagePublicId,
   },
-  returnValues = `{brand,model,productionYear,engineCapacity,enginePower,available,owner}`
+  returnValues = `{brand,model,productionYear,engineCapacity,enginePower,available,owner,imagePublicId}`
 ) => {
   return request({
     query: `
@@ -32,8 +38,9 @@ const addCar = (
           productionYear: "${productionYear}",
           engineCapacity: "${engineCapacity}",
           enginePower: "${enginePower}",
-          available: "${available},
-          owner: "${owner},
+          available: ${available},
+          owner: "${owner}",
+          imagePublicId:"${imagePublicId}",
         ) ${returnValues}
       }
     `,
@@ -65,16 +72,66 @@ describe("addCar", () => {
       return request({
         query: `
           mutation {
-            deleteCar(carId:"${testCar.id}"){
-              car {
-                id
-              }
+            deleteCar(carId:"${testCar.id}", imagePublicId:"${testCar.imagePublicId}"){
+             brand
             }
           }
         `,
       })
         .expect((res) => {
-          expect(res.body).toHaveProperty("data.deleteCar.id");
+          expect(res.body).toHaveProperty("data.deleteCar.brand");
+        })
+        .expect(200);
+    });
+  });
+
+  describe("borrow car", () => {
+    it("should borrow Car", () => {
+      return request({
+        query: `
+          mutation {
+            borrowCar(
+              id:"${testCar.id}", 
+              borrowedBy:"${testCar.borrowedBy}", 
+              borrowedFrom:"${testCar.borrowedFrom}", 
+              borrowedTo:"${testCar.borrowedTo}"){
+                id
+            }
+          }
+        `,
+      }).expect(200);
+    });
+  });
+
+  describe("check if borrow date is over", () => {
+    it("should handle availability", () => {
+      return request({
+        query: `
+        mutation{
+          checkBorrowDate{
+            brand
+          }
+        }`,
+      })
+        .expect((res) => {
+          expect(res.body).toHaveProperty("data.checkBorrowDate.brand");
+        })
+        .expect(200);
+    });
+  });
+
+  describe("should return all cars", () => {
+    it("return all cars", () => {
+      return request({
+        query: `
+        query cars{
+          cars{
+            brand
+          }
+        }`,
+      })
+        .expect((res) => {
+          expect(res.body).toHaveProperty("data.cars");
         })
         .expect(200);
     });

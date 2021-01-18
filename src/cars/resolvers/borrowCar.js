@@ -10,7 +10,6 @@ const borrowCar = async (_, { id, borrowedBy, borrowedFrom, borrowedTo }) => {
   };
 
   const singleCar = await Car.findOneAndUpdate(filter, update);
-  console.log(singleCar);
   return singleCar;
 };
 module.exports = borrowCar;

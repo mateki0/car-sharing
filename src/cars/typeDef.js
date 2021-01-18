@@ -3,6 +3,7 @@ const { gql } = require("apollo-server-express");
 const typeDef = gql`
   extend type Query {
     cars: [Car]
+    getUserCars: [Car]
   }
 
   extend type Mutation {
@@ -17,7 +18,7 @@ const typeDef = gql`
       imagePublicId: String
       date: String
       owner: String!
-    ): Car!
+    ): Car
     deleteCar(carId: String!, imagePublicId: String!): Car
     borrowCar(
       id: String!
