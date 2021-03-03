@@ -18,6 +18,7 @@ import * as mime from "react-native-mime-types";
 
 import ImagePreview from "./styled/ImagePreview";
 import { UserContext } from "../../src/contexts/UserContext";
+
 interface CarProps {
   brand: string;
   model: string;
@@ -25,6 +26,7 @@ interface CarProps {
   enginePower: string;
   productionYear: string;
 }
+
 const AddCarForm = () => {
   const navigation = useNavigation();
   const { control, errors, register, handleSubmit } = useForm<CarProps>();
@@ -45,6 +47,7 @@ const AddCarForm = () => {
         })
       : null;
   };
+
   const handleAdd = async (data: CarProps) => {
     const { brand, model, productionYear, engineCapacity, enginePower } = data;
     const available = true;
@@ -66,13 +69,6 @@ const AddCarForm = () => {
       console.log(error);
     }
   };
-  React.useEffect(() => {
-    register("brand");
-    register("model");
-    register("engineCapacity");
-    register("enginePower");
-    register("productionYear");
-  }, [register]);
 
   const askForPermission = async () => {
     const permissionResult = await Permission.askAsync(Permission.CAMERA);
@@ -84,6 +80,7 @@ const AddCarForm = () => {
     }
     return true;
   };
+
   const takeImage = async () => {
     const hasPermission = await askForPermission();
     if (!hasPermission) {
@@ -101,6 +98,14 @@ const AddCarForm = () => {
       }
     }
   };
+  
+  React.useEffect(() => {
+    register("brand");
+    register("model");
+    register("engineCapacity");
+    register("enginePower");
+    register("productionYear");
+  }, [register]);
 
   return (
     <AddCarContainer>

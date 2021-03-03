@@ -7,6 +7,7 @@ interface AvailableProps {
   availableOnly: boolean;
   toggleAvailable: () => void;
 }
+
 const AvailableFilter = ({
   availableOnly,
   toggleAvailable,

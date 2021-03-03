@@ -5,9 +5,9 @@
     "slug": "client",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./logo.jpg",
+    "icon": "./logo.png",
     "splash": {
-      "image": "./logo.jpg",
+      "image": "./logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -22,7 +22,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./logo.jpg",,
+        "foregroundImage": "./logo.png",
         "backgroundColor": "#FFFFFF"
       }
     },

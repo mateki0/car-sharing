@@ -31,11 +31,13 @@ const Account = () => {
       console.log(error);
     }
   };
+  
   if (error) {
     console.log(error.message);
   }
+
   if (loading) return <Text>"Loading..."</Text>;
-  console.log(data.getUserCars);
+  
   return (
     <AccountWrapper>
       <YourCars>Twoje samochody do wypożyczenia</YourCars>

@@ -15,6 +15,7 @@ import { BORROW_CAR } from "../../src/utils/mutations";
 import { UserContext } from "../../src/contexts/UserContext";
 import { useNavigation } from "@react-navigation/native";
 import ModelBrand from "./styled/ModelBrand";
+
 interface ModalProps {
   isModalOpened: boolean;
   brand: string;
@@ -23,6 +24,7 @@ interface ModalProps {
   id?: string;
   owner?: string;
 }
+
 const CarBorrowModal = ({
   isModalOpened,
   id,
@@ -73,6 +75,7 @@ const CarBorrowModal = ({
       });
     }
   };
+
   return (
     <ModalContainer>
       <Modal

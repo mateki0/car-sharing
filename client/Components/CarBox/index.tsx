@@ -9,15 +9,14 @@ import CarBorrowModal from "../CarBorrowModal";
 import moment from "moment";
 import { useMutation } from "@apollo/client";
 import { DELETE_CAR } from "../../src/utils/mutations";
-import BorrowButton from "../CarBorrowModal/styled/BorrowButton";
-import ButtonText from "../AccountForms/styled/ButtonText";
-import { Modal, Text } from "react-native";
+import { Text } from "react-native";
 import DeleteButtonsContainer from "./styled/DeleteButtonsContainer";
 import DeleteModal from "./DeleteModal";
 import AvailableWrapper from "./styled/AvailableWrapper";
 import CarImgWrapper from "./styled/CarImgWrapper";
 import LogoutButton from "../Account/styled/LogoutButton";
 import LogoutText from "../Account/styled/LogoutText";
+
 interface CarProps {
   id?: string;
   brand: string;
@@ -74,9 +73,11 @@ const CarBox = ({
   const handleDeleteModalOpen = () => {
     setDeleteModalOpened(true);
   };
+
   const handleDeleteModalClose = () => {
     setDeleteModalOpened(false);
   };
+
   return (
     <>
       <CarBoxContainer
