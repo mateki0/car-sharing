@@ -5,7 +5,9 @@ const app = require("./app");
 const config = require("./config");
 
 const mongoHost = new url.URL(config.MONGODB_URI).host;
+
 mongoose.set("useFindAndModify", false);
+
 const startServer = async function () {
   const mongooseOptions = {
     useNewUrlParser: true,
