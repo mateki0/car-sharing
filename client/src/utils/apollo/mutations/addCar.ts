@@ -9,7 +9,7 @@ const ADD_CAR = gql`
     $engineCapacity: String!
     $enginePower: String!
     $available: Boolean!
-    $image: Upload
+    $image: Upload!
     $owner:String!
   ) {
     addCar(

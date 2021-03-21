@@ -1,6 +1,8 @@
 const { gql } = require("apollo-server-express");
 
 const typeDef = gql`
+  scalar Upload
+
   extend type Query {
     cars: [Car]
     getUserCars: [Car]
@@ -15,7 +17,7 @@ const typeDef = gql`
       engineCapacity: String!
       enginePower: String!
       available: Boolean!
-      image: Upload
+      image: Upload!
       imagePublicId: String
       date: String
       owner: String!

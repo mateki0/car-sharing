@@ -1,5 +1,7 @@
 import { onError } from 'apollo-link-error'
 import fetch from 'unfetch'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setContext } from '@apollo/client/link/context'
 import {
   ApolloLink,
   ApolloClient,
@@ -13,6 +15,17 @@ const initApollo = () => {
     uri: 'http://192.168.1.2:5000/graphql',
     credentials: 'include',
   })
+
+  // const authLink = setContext(async (_, { headers }) => {
+  //   const token = await AsyncStorage.getItem('token');
+
+  //   return {
+  //     headers: {
+  //       ...headers,
+  //       Authorization: token ? token : ``,
+  //     },
+  //   };
+  // });
 
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
@@ -29,7 +42,7 @@ const initApollo = () => {
   const cache = new InMemoryCache()
 
   return new ApolloClient({
-    link: ApolloLink.from([errorLink as any, httpLink]) as any,
+    link: ApolloLink.from([errorLink, httpLink]) as any,
     cache,
     resolvers: {},
   })

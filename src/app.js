@@ -17,7 +17,7 @@ const typeDef = gql`
 `;
 
 const server = new ApolloServer({
-  upload:false,
+  uploads:false,
   typeDefs: [typeDef, cars.typeDef, user.typeDef],
   resolvers: [cars.resolvers, user.resolvers],
   context: ({ req, res }) => ({ req, res }),
@@ -27,7 +27,7 @@ const app = express();
 
 app.use(cookieParser());
 
-app.use('/graphql', graphqlUploadExpress({maxFileSize: 1000000000, maxFiles: 5}));
+app.use('/graphql', graphqlUploadExpress({maxFileSize: 1000000000, maxFiles: 1}));
 
 app.use((req, _, next) => {
   const accessToken = req.cookies["access-token"];

@@ -7,7 +7,7 @@ cloudinary.config({
 });
 
 const processUpload = async (upload) => {
-  const { createReadStream } = await upload;
+  const { createReadStream } = await upload.file;
   const stream = createReadStream();
   const cloudinaryUpload = async ({ stream }) => {
     try {
