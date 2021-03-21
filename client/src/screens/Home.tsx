@@ -47,6 +47,10 @@ const Home = () => {
 
   if (loading) return <ActivityIndicator size="large" color="#0000ff"/>;
 
+  if(!loading && !data.cars.length){
+    return(<Layout><Heading text="Brak Dodanych Samochodów" /></Layout>) 
+  }
+  
   if (data) {
     const cars = availableOnly
       ? data.cars.filter(
@@ -80,7 +84,7 @@ const Home = () => {
       </Layout>
     );
   } else {
-    return <Text>Loading</Text>;
+    return <ActivityIndicator size="large" color="#0000ff"/>
   }
 };
 export default Home;

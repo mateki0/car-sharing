@@ -24,6 +24,7 @@ interface CarProps {
   brand: string;
   model: string;
   engineCapacity: string;
+  description:string;
   enginePower: string;
   productionYear: string;
 }
@@ -50,7 +51,7 @@ const AddCarForm = () => {
   };
 
   const handleAdd = async (data: CarProps) => {
-    const { brand, model, productionYear, engineCapacity, enginePower } = data;
+    const { brand, model, productionYear, description, engineCapacity, enginePower } = data;
     const available = true;
     const image = generateRNFile(file, `picture-${Date.now()}`);
     try {
@@ -59,6 +60,7 @@ const AddCarForm = () => {
           brand,
           model,
           productionYear,
+          description,
           engineCapacity,
           enginePower,
           available,
@@ -146,6 +148,27 @@ const AddCarForm = () => {
       />
       {errors.model && (
         <ErrorText>To pole jest wymagane (1-25 znaków)</ErrorText>
+      )}
+      <Controller
+        control={control}
+        render={({ onChange, onBlur, value }) => (
+          <Input
+            onChangeText={(value) => onChange(value)}
+            value={value}
+            placeholder="Opis"
+            onBlur={onBlur}
+          />
+        )}
+        name="description"
+        defaultValue=""
+        rules={{
+          required: true,
+          minLength: 8,
+          maxLength: 150,
+        }}
+      />
+      {errors.description && (
+        <ErrorText>To pole jest wymagane (8-150 znaków)</ErrorText>
       )}
 
       <Controller

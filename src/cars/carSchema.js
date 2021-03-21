@@ -13,6 +13,10 @@ const carSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   engineCapacity: {
     type: String,
     required: true,

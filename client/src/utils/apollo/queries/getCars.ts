@@ -7,6 +7,7 @@ const GET_CARS = gql`
       brand
       model
       productionYear
+      description
       engineCapacity
       enginePower
       available

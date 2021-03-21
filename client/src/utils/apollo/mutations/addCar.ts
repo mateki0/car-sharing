@@ -5,6 +5,7 @@ const ADD_CAR = gql`
     $brand: String!
     $model: String!
     $productionYear: String!
+    $description: String!
     $engineCapacity: String!
     $enginePower: String!
     $available: Boolean!
@@ -15,6 +16,7 @@ const ADD_CAR = gql`
       brand: $brand
       model: $model
       productionYear: $productionYear
+      description: $description
       engineCapacity: $engineCapacity
       enginePower: $enginePower
       available: $available
@@ -22,12 +24,6 @@ const ADD_CAR = gql`
       owner: $owner
     ) {
       brand
-      model
-      engineCapacity
-      enginePower
-      productionYear
-      available
-      
     }
   }
 `;

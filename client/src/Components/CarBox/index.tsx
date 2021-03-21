@@ -16,6 +16,7 @@ import CarImgWrapper from "./styled/CarImgWrapper";
 import LogoutButton from "../Account/styled/LogoutButton";
 import LogoutText from "../Account/styled/LogoutText";
 import DELETE_CAR from "../../utils/apollo/mutations/deleteCar";
+import CarDetailsModal from "../CarDetailsModal";
 
 interface CarProps {
   id?: string;
@@ -47,22 +48,22 @@ const CarBox = ({
   imagePublicId,
 }: CarProps) => {
   const [deleteCar] = useMutation(DELETE_CAR);
-  const [isModalOpened, setModalOpened] = React.useState(false);
+  const [isCarDetailsModalOpened, setCarDetailsModalOpened] = React.useState(false);
   const [isDeleteModalOpened, setDeleteModalOpened] = React.useState(false);
   const capacity = engineCapacity.includes(".") ? "l" : "cm3";
 
-  const handleModalOpen = () => {
+  const handleCarDetailsModalOpen = () => {
     const borrowedToDate = borrowedTo
       ? moment(borrowedTo, "x").format("DD-MM-YYYY")
       : "";
 
     available
-      ? setModalOpened(true)
+      ? setCarDetailsModalOpened(true)
       : alert(`To auto jest wypożyczone do ${borrowedToDate}`);
   };
 
-  const handleModalClose = () => {
-    setModalOpened(false);
+  const handleCarDetailsModalClose = () => {
+    setCarDetailsModalOpened(false);
   };
 
   const handleDeleteCar = () => {
@@ -81,7 +82,7 @@ const CarBox = ({
   return (
     <>
       <CarBoxContainer
-        onPress={isAccountBox ? handleDeleteModalOpen : handleModalOpen}
+        onPress={isAccountBox ? handleDeleteModalOpen : handleCarDetailsModalOpen}
       >
         <CarImgWrapper>
           <CarImg
@@ -120,13 +121,13 @@ const CarBox = ({
       ) : (
         <Text></Text>
       )}
-      <CarBorrowModal
-        id={id}
+      <CarDetailsModal
         brand={brand}
         model={model}
-        isModalOpened={isModalOpened}
-        handleModalClose={handleModalClose}
+        isCarDetailsModalOpened={isCarDetailsModalOpened}
+        handleCarDetailsModalClose={handleCarDetailsModalClose}
         owner={owner}
+        imgSrc={imgSrc}
       />
     </>
   );

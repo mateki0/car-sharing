@@ -10,6 +10,7 @@ const typeDef = gql`
     addCar(
       brand: String!
       model: String!
+      description: String!
       productionYear: String!
       engineCapacity: String!
       enginePower: String!
@@ -33,6 +34,7 @@ const typeDef = gql`
     id: ID
     brand: String
     model: String
+    description: String
     productionYear: String
     engineCapacity: String
     enginePower: String
@@ -45,6 +47,7 @@ const typeDef = gql`
     imagePublicId: String
   }
 `;
+
 module.exports = {
   typeDef,
 };
