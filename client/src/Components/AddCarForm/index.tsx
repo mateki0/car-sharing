@@ -19,6 +19,7 @@ import ImagePreview from "./styled/ImagePreview";
 import { UserContext } from "../../contexts/UserContext";
 import ADD_CAR from "../../utils/apollo/mutations/addCar";
 import AddCarText from "./styled/AddCarText";
+import ControllerWrapper from "./styled/ControllerWrapper";
 
 interface CarProps {
   brand: string;
@@ -106,144 +107,154 @@ const AddCarForm = () => {
   
   return (
     <AddCarContainer>
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <Input
-            onChangeText={(value) => onChange(value)}
-            value={value}
-            placeholder="Marka"
-            onBlur={onBlur}
-          />
+      <ControllerWrapper>
+        <Controller
+          control={control}
+          render={({ onChange, onBlur, value }) => (
+            <Input
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Marka"
+              onBlur={onBlur}
+            />
+          )}
+          name="brand"
+          defaultValue=""
+          rules={{
+            required: true,
+            minLength: 3,
+            maxLength: 25,
+          }}
+        />
+        {errors.brand && (
+          <ErrorText>To pole jest wymagane (3-25 znaków)</ErrorText>
         )}
-        name="brand"
-        defaultValue=""
-        rules={{
-          required: true,
-          minLength: 3,
-          maxLength: 25,
-        }}
-      />
-      {errors.brand && (
-        <ErrorText>To pole jest wymagane (3-25 znaków)</ErrorText>
-      )}
+      </ControllerWrapper>
+      <ControllerWrapper>
+        <Controller
+          control={control}
+          render={({ onChange, onBlur, value }) => (
+            <Input
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Model"
+              onBlur={onBlur}
+            />
+          )}
+          name="model"
+          defaultValue=""
+          rules={{
+            required: true,
+            minLength: 1,
+            maxLength: 25,
+          }}
+        />
+        {errors.model && (
+          <ErrorText>To pole jest wymagane (1-25 znaków)</ErrorText>
+        )}
+      </ControllerWrapper>
+      <ControllerWrapper>
+        <Controller
+          control={control}
+          render={({ onChange, onBlur, value }) => (
+            <Input
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Opis"
+              onBlur={onBlur}
+            />
+          )}
+          name="description"
+          defaultValue=""
+          rules={{
+            required: true,
+            minLength: 8,
+            maxLength: 150,
+          }}
+        />
+        {errors.description && (
+          <ErrorText>To pole jest wymagane (8-150 znaków)</ErrorText>
+        )}
+      </ControllerWrapper>
+      <ControllerWrapper>
+        <Controller
+          control={control}
+          render={({ onChange, onBlur, value }) => (
+            <Input
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Pojemność silnika"
+              onBlur={onBlur}
+              keyboardType="numeric"
+            />
+          )}
+          name="engineCapacity"
+          rules={{
+            pattern: {
+              value: /\d{1,5}/,
+              message: "Niepoprawna wartość (1-5 cyfr)",
+            },
+          }}
+          defaultValue=""
+        />
+        {errors.engineCapacity && (
+          <ErrorText>{errors.engineCapacity.message}</ErrorText>
+        )}
+      </ControllerWrapper>
+      <ControllerWrapper>
+        <Controller
+          control={control}
+          render={({ onChange, onBlur, value }) => (
+            <Input
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Moc(km)"
+              onBlur={onBlur}
+              keyboardType="numeric"
+            />
+          )}
+          name="enginePower"
+          rules={{
+            pattern: {
+              value: /\d{1,4}/,
+              message: "Niepoprawna wartość (1-4 cyfry)",
+            },
+          }}
+          defaultValue=""
+        />
+        {errors.enginePower && (
+          <ErrorText>{errors.enginePower.message}</ErrorText>
+        )}
 
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <Input
-            onChangeText={(value) => onChange(value)}
-            value={value}
-            placeholder="Model"
-            onBlur={onBlur}
-          />
+      </ControllerWrapper>
+      <ControllerWrapper>
+        <Controller
+          control={control}
+          render={({ onChange, onBlur, value }) => (
+            <Input
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Rok produkcji"
+              onBlur={onBlur}
+              keyboardType="numeric"
+            />
+          )}
+          name="productionYear"
+          defaultValue=""
+          rules={{
+            min: currentYear - 50,
+            max: currentYear,
+            pattern: {
+              value: /\d{1,4}/,
+              message: "Niepoprawna wartość (1-4 cyfry)",
+            },
+          }}
+        />
+        {errors.productionYear && (
+          <ErrorText>{errors.productionYear.message}</ErrorText>
         )}
-        name="model"
-        defaultValue=""
-        rules={{
-          required: true,
-          minLength: 1,
-          maxLength: 25,
-        }}
-      />
-      {errors.model && (
-        <ErrorText>To pole jest wymagane (1-25 znaków)</ErrorText>
-      )}
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <Input
-            onChangeText={(value) => onChange(value)}
-            value={value}
-            placeholder="Opis"
-            onBlur={onBlur}
-          />
-        )}
-        name="description"
-        defaultValue=""
-        rules={{
-          required: true,
-          minLength: 8,
-          maxLength: 150,
-        }}
-      />
-      {errors.description && (
-        <ErrorText>To pole jest wymagane (8-150 znaków)</ErrorText>
-      )}
+      </ControllerWrapper>
 
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <Input
-            onChangeText={(value) => onChange(value)}
-            value={value}
-            placeholder="Pojemność silnika"
-            onBlur={onBlur}
-            keyboardType="numeric"
-          />
-        )}
-        name="engineCapacity"
-        rules={{
-          pattern: {
-            value: /\d{1,5}/,
-            message: "Niepoprawna wartość (1-5 cyfr)",
-          },
-        }}
-        defaultValue=""
-      />
-      {errors.engineCapacity && (
-        <ErrorText>{errors.engineCapacity.message}</ErrorText>
-      )}
-
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <Input
-            onChangeText={(value) => onChange(value)}
-            value={value}
-            placeholder="Moc(km)"
-            onBlur={onBlur}
-            keyboardType="numeric"
-          />
-        )}
-        name="enginePower"
-        rules={{
-          pattern: {
-            value: /\d{1,4}/,
-            message: "Niepoprawna wartość (1-4 cyfry)",
-          },
-        }}
-        defaultValue=""
-      />
-      {errors.enginePower && (
-        <ErrorText>{errors.enginePower.message}</ErrorText>
-      )}
-
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <Input
-            onChangeText={(value) => onChange(value)}
-            value={value}
-            placeholder="Rok produkcji"
-            onBlur={onBlur}
-            keyboardType="numeric"
-          />
-        )}
-        name="productionYear"
-        defaultValue=""
-        rules={{
-          min: currentYear - 50,
-          max: currentYear,
-          pattern: {
-            value: /\d{1,4}/,
-            message: "Niepoprawna wartość (1-4 cyfry)",
-          },
-        }}
-      />
-      {errors.productionYear && (
-        <ErrorText>{errors.productionYear.message}</ErrorText>
-      )}
       <AddCarText>
         {file ? "Dodano zdjecie!" : "Dodaj zdjęcie swojego samochodu"}
       </AddCarText>

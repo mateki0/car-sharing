@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator } from "react-native";
 import CarBox from "../Components/CarBox";
 import Heading from "../Components/Heading";
 import { useQuery } from "@apollo/client";
@@ -8,6 +8,8 @@ import AvailableFilter from "../Components/AvailableFilter/AvailableFilter";
 import Layout from "../Components/Layout";
 import GET_CARS from "../utils/apollo/queries/getCars";
 import CHECK_BORROW_DATE from "../utils/apollo/mutations/checkBorrowDate";
+import GET_USER from "../utils/apollo/queries/getUser";
+import { UserContext } from "../contexts/UserContext";
 
 export interface CarsProps {
   id: string;
@@ -24,28 +26,31 @@ export interface CarsProps {
   imagePublicId?: string;
 }
 const Home = () => {
+  const {loading:userLoading, data:userData} = useQuery(GET_USER);
   const { loading, error, data } = useQuery(GET_CARS);
+  const [checkBorrowDate] = useMutation(CHECK_BORROW_DATE);
   const [availableOnly, setAvailableOnly] = React.useState(true);
+  const { handleUserChange } = React.useContext(UserContext);
 
   const toggleAvailable = () => {
     setAvailableOnly(!availableOnly);
   };
 
-  const [checkBorrowDate] = useMutation(CHECK_BORROW_DATE);
-
   React.useEffect(() => {
-
     checkBorrowDate();
-
   }, []);
 
+  React.useEffect(()=>{
+    if(!userLoading && userData){
+      handleUserChange({email:userData.me.email, id:userData.me.id})
+    }
+  },[userData, userLoading])
+
   if (error) {
-
     console.log(error.message);
-
   }
 
-  if (loading) return <ActivityIndicator size="large" color="#0000ff"/>;
+  if (loading) return (<Layout><ActivityIndicator size="large" color="#0000ff"/></Layout>);
 
   if(!loading && !data.cars.length){
     return(<Layout><Heading text="Brak Dodanych Samochodów" /></Layout>) 

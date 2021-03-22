@@ -11,6 +11,8 @@ import { UserContext } from "../../contexts/UserContext";
 import INSERT_USER from "../../utils/apollo/mutations/insertUser";
 import LOGIN_USER from "../../utils/apollo/mutations/loginUser";
 import { ActivityIndicator } from "react-native";
+import ControllerWrapper from "../AddCarForm/styled/ControllerWrapper";
+
 
 interface UseFormProps {
   email: string;
@@ -61,47 +63,51 @@ const AccountForms = ({ isLogin }: { isLogin?: boolean }) => {
 
   return (
     <FormContainer>
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <Input
-            editable={editable}
-            onChangeText={(value) => onChange(value)}
-            value={value}
-            placeholder="Email"
-            onBlur={onBlur}
-          />
-        )}
-        name="email"
-        rules={{
-          pattern: {
-            value: EMAIL_REGEX,
-            message: "Email jest nieprawidłowy",
-          },
-        }}
-        defaultValue=""
-      />
-      {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+      <ControllerWrapper>
+        <Controller
+          control={control}
+          render={({ onChange, onBlur, value }) => (
+            <Input
+              editable={editable}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Email"
+              onBlur={onBlur}
+            />
+          )}
+          name="email"
+          rules={{
+            pattern: {
+              value: EMAIL_REGEX,
+              message: "Email jest nieprawidłowy",
+            },
+          }}
+          defaultValue=""
+        />
+        {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+      </ControllerWrapper>
+      <ControllerWrapper>
+        <Controller
+          control={control}
+          render={({ onChange, onBlur, value }) => (
+            <Input
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Hasło"
+              secureTextEntry={true}
+              onBlur={onBlur}
+            />
+          )}
+          name="password"
+          rules={{ required: true, minLength: 8 }}
+          defaultValue=""
+        />
 
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <Input
-            onChangeText={(value) => onChange(value)}
-            value={value}
-            placeholder="Hasło"
-            secureTextEntry={true}
-            onBlur={onBlur}
-          />
+        {errors.password && (
+          <ErrorText>Hasło jest nieprawidłowe(min. 8 znaków)</ErrorText>
         )}
-        name="password"
-        rules={{ required: true, minLength: 8 }}
-        defaultValue=""
-      />
+      </ControllerWrapper>
 
-      {errors.password && (
-        <ErrorText>Hasło jest nieprawidłowe(min. 8 znaków)</ErrorText>
-      )}
       <SubmitButton
         accessibilityLabel="Create account form submit"
         onPress={
