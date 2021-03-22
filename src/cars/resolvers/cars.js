@@ -7,7 +7,7 @@ const cars = async (_, {}) => {
     }
     return cars;
   });
-  console.log(cars);
+  
   return cars;
 };
 module.exports = cars;

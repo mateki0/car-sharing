@@ -6,6 +6,8 @@ import Layout from "../Components/Layout";
 
 const AccountScreen = () => {
   const { user } = React.useContext(UserContext);
+
+  
   return (
     <Layout>
       <Heading
