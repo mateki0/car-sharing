@@ -25,6 +25,7 @@ interface CarProps {
   engineCapacity: string;
   enginePower: string;
   productionYear: string;
+  description?:string;
   available: boolean;
   imgSrc: string;
   owner?: string;
@@ -39,6 +40,7 @@ const CarBox = ({
   engineCapacity,
   enginePower,
   productionYear,
+  description,
   available,
   imgSrc,
   id,
@@ -50,7 +52,7 @@ const CarBox = ({
   const [deleteCar] = useMutation(DELETE_CAR);
   const [isCarDetailsModalOpened, setCarDetailsModalOpened] = React.useState(false);
   const [isDeleteModalOpened, setDeleteModalOpened] = React.useState(false);
-  const capacity = engineCapacity.includes(".") ? "l" : "cm3";
+  
 
   const handleCarDetailsModalOpen = () => {
     const borrowedToDate = borrowedTo
@@ -124,6 +126,9 @@ const CarBox = ({
       <CarDetailsModal
         brand={brand}
         model={model}
+        enginePower={enginePower}
+        engineCapacity={engineCapacity}
+        description={description}
         isCarDetailsModalOpened={isCarDetailsModalOpened}
         handleCarDetailsModalClose={handleCarDetailsModalClose}
         owner={owner}

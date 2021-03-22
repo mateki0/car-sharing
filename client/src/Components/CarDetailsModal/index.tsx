@@ -15,6 +15,9 @@ import OpenBorrowModalButton from './styled/OpenBorrowModalButton';
 interface CarDetailsModalProps {
   brand: string;
   model: string;
+  enginePower:string;
+  engineCapacity:string;
+  description?:string;
   isCarDetailsModalOpened: boolean;
   handleCarDetailsModalClose: () => void;
   owner: string | undefined;
@@ -24,6 +27,9 @@ interface CarDetailsModalProps {
 const CarDetailsModal = ({
   brand,
   model,
+  enginePower,
+  engineCapacity,
+  description,
   isCarDetailsModalOpened,
   handleCarDetailsModalClose,
   owner,
@@ -31,7 +37,7 @@ const CarDetailsModal = ({
 }: CarDetailsModalProps) => {
 
   const [isBorrowModalOpened, setIsBorrowModalOpened] = React.useState(false);
-
+  
   const handleBorrowModalOpen = () => {
     setIsBorrowModalOpened(true);
   }
@@ -51,15 +57,14 @@ const CarDetailsModal = ({
             <View>
             <CarImage source={{uri:imgSrc}} />
             <DetailBoxesContainer>
-              <DetailSmallBox valueName="Max km/h" value="320"/>
-              <DetailSmallBox valueName="KM" value="450"/>
-              <DetailSmallBox valueName="Silnik" value="3.2L"/>
+              <DetailSmallBox valueName="KM" value={enginePower}/>
+              <DetailSmallBox valueName="Silnik" value={engineCapacity + 'L'}/>
             </DetailBoxesContainer>
             </View>
             <DetailCarDescriptionWrapper>
               <DetailCarBrand>{brand}</DetailCarBrand>
               <DetailCarModel>{model}</DetailCarModel>
-              <DetailCarDescription>Produkowany od roku 2010, luksusowy samochód segmentu F</DetailCarDescription>
+              <DetailCarDescription>{description}</DetailCarDescription>
             </DetailCarDescriptionWrapper>
             <OpenBorrowModalButton onPress={handleBorrowModalOpen}><ButtonText>Wypożycz</ButtonText></OpenBorrowModalButton>
           </DetailsModalInnerWrapper>

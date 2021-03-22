@@ -10,7 +10,7 @@ import { useMutation } from "@apollo/client";
 import { UserContext } from "../../contexts/UserContext";
 import INSERT_USER from "../../utils/apollo/mutations/insertUser";
 import LOGIN_USER from "../../utils/apollo/mutations/loginUser";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, Text } from "react-native";
 import ControllerWrapper from "../AddCarForm/styled/ControllerWrapper";
 
 
@@ -23,11 +23,11 @@ const AccountForms = ({ isLogin }: { isLogin?: boolean }) => {
   const navigation = useNavigation();
   const { handleUserChange } = React.useContext(UserContext);
 
-  const [insertUser, {loading:registerLoading}] = useMutation(INSERT_USER, {
+  const [insertUser, {loading:registerLoading, error:registerError}] = useMutation(INSERT_USER, {
     onCompleted: () => navigation.navigate("Login"),
   });
 
-  const [loginUser, {loading:loginLoading}] = useMutation(LOGIN_USER, {
+  const [loginUser, {loading:loginLoading, error:loginError}] = useMutation(LOGIN_USER, {
     onCompleted: ({ login }) => {
       handleUserChange({ email: login.email, id: login.id });
       navigation.navigate("Samochody");
@@ -57,12 +57,15 @@ const AccountForms = ({ isLogin }: { isLogin?: boolean }) => {
     });
   };
 
+  
   if (loginLoading || registerLoading) return <ActivityIndicator size="large" color="#0000ff"/>;
   
   const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   return (
     <FormContainer>
+      {loginError && <ErrorText>{loginError.message}</ErrorText>}
+      {registerError && <ErrorText>{registerError.message}</ErrorText>}
       <ControllerWrapper>
         <Controller
           control={control}

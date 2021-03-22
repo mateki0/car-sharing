@@ -18,6 +18,7 @@ export interface CarsProps {
   productionYear: string;
   engineCapacity: string;
   enginePower: string;
+  description?:string;
   available: boolean;
   date: string;
   image: string;
@@ -41,7 +42,7 @@ const Home = () => {
   }, []);
 
   React.useEffect(()=>{
-    if(!userLoading && userData){
+    if(!userLoading && userData && userData.me){
       handleUserChange({email:userData.me.email, id:userData.me.id})
     }
   },[userData, userLoading])
@@ -78,6 +79,7 @@ const Home = () => {
               model={car.model}
               engineCapacity={car.engineCapacity}
               enginePower={car.enginePower}
+              description={car.description}
               productionYear={car.productionYear}
               available={car.available}
               imgSrc={car.image}

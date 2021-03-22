@@ -183,7 +183,7 @@ const AddCarForm = () => {
             <Input
               onChangeText={(value) => onChange(value)}
               value={value}
-              placeholder="Pojemność silnika"
+              placeholder="Pojemność silnika (np 3.5)"
               onBlur={onBlur}
               keyboardType="numeric"
             />
@@ -191,8 +191,8 @@ const AddCarForm = () => {
           name="engineCapacity"
           rules={{
             pattern: {
-              value: /\d{1,5}/,
-              message: "Niepoprawna wartość (1-5 cyfr)",
+              value: /^[0-9]\.[0-9]$/i,
+              message: "Niepoprawna wartość (Wymagany format 3.5)",
             },
           }}
           defaultValue=""
